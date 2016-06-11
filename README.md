@@ -1,2 +1,2 @@
 # °SCOCADIGO°
-SCOCADIGO- a disc golf scorecard 
+a disc golf scorecard 
