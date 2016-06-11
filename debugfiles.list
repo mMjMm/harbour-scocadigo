@@ -1,0 +1,8 @@
+%dir /usr/lib/debug
+%dir /usr/lib/debug/.build-id
+%dir /usr/lib/debug/.build-id/8c
+%dir /usr/lib/debug/usr
+%dir /usr/lib/debug/usr/bin
+/usr/lib/debug/.build-id/8c/1348e380d97e78a54f2f4ab9817953c440f80b.debug
+/usr/lib/debug/.build-id/8c/1348e380d97e78a54f2f4ab9817953c440f80b
+/usr/lib/debug/usr/bin/harbour-scocadigo.debug
