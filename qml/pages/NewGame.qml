@@ -17,6 +17,8 @@ Page {
     }
     forwardNavigation: navigation
     Component.onCompleted: {
+        DB.initialize()
+
         DB.sortBySelected()
         if (DB.playerselected() > 0) {
             navigation = true

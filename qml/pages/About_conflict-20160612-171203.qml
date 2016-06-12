@@ -125,8 +125,6 @@ Page {
                        id:license
                        anchors.horizontalCenter: logo.horizontalCenter
                        anchors.top:flattr.bottom
-                       font.family: bebasNeue.name
-
                        anchors.topMargin: Theme.paddingLarge
                        font.pixelSize: Theme.fontSizeLarge
                        text: "LICENSE: MIT "

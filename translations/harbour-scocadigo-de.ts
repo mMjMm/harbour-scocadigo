@@ -25,29 +25,6 @@
     </message>
 </context>
 <context>
-    <name>About_conflict-20160611-205330</name>
-    <message>
-        <source>°scocadigo° ver. 0.1 ALPHA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>by Michael Johannes Muik</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SCOCADIGO is a scorecard app for Disc Golf. It is possible to add new players, courses and keep track of your Disc Golf rounds. Watch individual statistics and compare your scores with other players. Improve your game. Just play!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>about</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>scocadigo</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Courses</name>
     <message>
         <source>courses</source>

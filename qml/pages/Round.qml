@@ -36,6 +36,12 @@ Page {
             pageStack.replace(Qt.resolvedUrl("FirstPage.qml"))
         })
     }
+
+    RemorsePopup {
+        id: remorse
+    }
+
+
     backNavigation: true
 
     Component.onCompleted: {
@@ -134,7 +140,7 @@ Page {
                 text: qsTr("CANCEL Round")
                 onClicked: {
                     mainPage.globalindex = 0
-                    reset()
+                    reset();
                 }
             }
         }

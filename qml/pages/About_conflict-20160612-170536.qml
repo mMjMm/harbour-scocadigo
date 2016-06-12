@@ -118,26 +118,16 @@ Page {
                 }
             }
 
+            Text{
+            id:license
+            anchors.horizontalCenter: logo.horizontalCenter
+            color:"white";
+            text: "MIT License , <a https://github.com/mMjMm/harbour-scocadigo/blob/master/LICENSE'>MIT License </a>"
+            onLinkActivated: Qt.openUrlExternally(link)
+            font.pixelSize: Theme.fontSizeLarge + 10
 
 
-
-            Text {
-                       id:license
-                       anchors.horizontalCenter: logo.horizontalCenter
-                       anchors.top:flattr.bottom
-                       font.family: bebasNeue.name
-
-                       anchors.topMargin: Theme.paddingLarge
-                       font.pixelSize: Theme.fontSizeLarge
-                       text: "LICENSE: MIT "
-                       color: Theme.highlightColor
-                       MouseArea {
-                           id : buttonMouseArea2
-                           anchors.fill : parent
-                           onClicked: Qt.openUrlExternally("https://github.com/mMjMm/harbour-scocadigo/blob/master/LICENSE")
-                       }
-           }
-
+            }
             }
         Column {
             id: column

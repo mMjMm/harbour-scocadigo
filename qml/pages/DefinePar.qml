@@ -120,7 +120,7 @@ Dialog {
                         Rectangle{
                             id:definebaskettextrect
                             width:screen.width-30//baskettext.width+40
-                            height: baskettext.height
+                            height: baskettext.height+Theme.paddingLarge+Theme.paddingLarge
                             color: "#d15a67"
                             //opacity: index % 2 == 0 ? 0.8 : 1
 
