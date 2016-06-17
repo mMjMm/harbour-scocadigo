@@ -88,6 +88,21 @@
     </message>
 </context>
 <context>
+    <name>Players_conflict-20160617-174213</name>
+    <message>
+        <source>Delete all players</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Players</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Round</name>
     <message>
         <source>CANCEL Round</source>
@@ -109,6 +124,62 @@
     </message>
     <message>
         <source>SAVE Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Round_conflict-20160613-004319</name>
+    <message>
+        <source>CANCEL Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Round_conflict-20160613-005626</name>
+    <message>
+        <source>CANCEL Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Round_conflict-20160616-114504</name>
+    <message>
+        <source>CANCEL Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Round_conflict-20160616-152042</name>
+    <message>
+        <source>CANCEL Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Round_conflict-20160616-153418</name>
+    <message>
+        <source>CANCEL Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Round_conflict-20160617-192343</name>
+    <message>
+        <source>CANCEL Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Round_conflict-20160617-193152</name>
+    <message>
+        <source>CANCEL Round</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Round_conflict-20160617-235945</name>
+    <message>
+        <source>CANCEL Round</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

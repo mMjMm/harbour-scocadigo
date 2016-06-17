@@ -114,23 +114,33 @@ Page {
             spacing: Theme.paddingSmall
             model: player
             delegate: ListItem {
-
                 id: delegate
-                contentHeight: nameLabel.height+fullNameLabel.height+emailLabel.height+shotstatistics.height+Theme.paddingLarge*2
+               // contentHeight: nameLabel.height+fullNameLabel.height+emailLabel.height+shotstatistics.height+Theme.paddingLarge*2
+                contentHeight: names.height
                 width: names.width
                 visible: true
-                menu: contextMenuComponent
+                menu:ContextMenu {
+                           id: contextMenu
+                           width: delegate.width+Theme.paddingMedium
+
+                           MenuItem {
+                               text: "Delete"
+                               onClicked: remove()
+                           }
+                           MenuItem {
+                               text: "Edit"
+                               onClicked: editplayer()
+                           }
+                       }
                 //DELETE FUNKTION (löscht gewählten namen aus der datenbank)
                 function remove() {
                     delegate.remorseAction("Deleting", function () {
                         DB.deletePlayer(nickname)
                         player.remove(index)
-
                     })
                 }
 
                 onClicked: {
-
                     //animate Opacity when button is pressed
                     // animateOpacity.start()
                     //debugging
@@ -141,7 +151,7 @@ Page {
                 Rectangle {
                     id: names
                     width: screen.width - 50
-                    height: parent.height
+                    height: nameLabel.height+fullNameLabel.height+emailLabel.height+shotstatistics.height+Theme.paddingLarge+Theme.paddingSmall
                     color: "#3c7ea7"
                    // opacity: index % 2 == 0 ? 0.7 : 1
 
@@ -191,7 +201,7 @@ Page {
                     //anchors.top: names.top
                     //anchors.topMargin: Theme.paddingLarge
                     font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeExtraSmall
+                    font.pixelSize: Theme.fontSizeTiny
                     text: "Played rounds: " + roundplayed + "\nTime played: "
                           + timeplayed + "\nAverage par: " + DB.getAveragePlayer(nickname)
                     //text: "Played rounds: 9999"+"\nTime played: 10"+ " h\nRounds won: 2" + "\nAverage par: 2.1"
@@ -203,7 +213,7 @@ Page {
                     anchors.top: infoLabel.bottom
                     anchors.topMargin: Theme.paddingMedium
                     font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeExtraSmall - 6
+                    font.pixelSize: Theme.fontSizeTiny-3
                     text: "| ace: " + aces + " | eagle: " +eagle+ " | birdie: " + birdies+" | par: "
                           + pars+" | Bogey: " +bogeys+" | rest : " + rest+ " | total : " + total+" |"
 
@@ -220,23 +230,8 @@ Page {
                                       })
                 }
 
-                //CONTEXT MENÜ
-                Component {
-                    id: contextMenuComponent
-                    ContextMenu {
-                        id: contextMenu
-                        width: delegate.width+Theme.paddingMedium
 
-                        MenuItem {
-                            text: "Delete"
-                            onClicked: remove()
-                        }
-                        MenuItem {
-                            text: "Edit"
-                            onClicked: editplayer()
-                        }
-                    }
-                }
+
             }
         }
     }

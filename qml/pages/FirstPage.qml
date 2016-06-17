@@ -35,8 +35,8 @@ Page {
         source: "bebasNeue Regular.otf"
     }
         Component.onCompleted: {
-            mainWindow.cover = null
 
+       //activate cover for start a new game!
         /*
         DB.initialize();
         DB.getBaseResult();
@@ -55,6 +55,9 @@ Page {
         DB.showEndResult();
 */
     }
+        onStatusChanged: {
+            mainWindow.cover =Qt.resolvedUrl("../cover/CoverPage.qml")
+        }
     Rectangle {
         id: root
         width: parent.width

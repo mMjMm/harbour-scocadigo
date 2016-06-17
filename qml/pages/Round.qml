@@ -22,6 +22,10 @@ Page {
     property int padding1_2:Theme.paddingLarge*1.2;
     property int paddinglarge12:Theme.paddingLarge*1.2
 
+   property int coverspacing:-20;
+   property int coverfontsize: Theme.fontSizeLarge
+
+
     FontLoader {
         id: bebasNeue
         source: "bebasNeue Regular.otf"
@@ -45,6 +49,7 @@ Page {
     backNavigation: true
 
     Component.onCompleted: {
+
         if (mainPage.globalindex < 1) {
             howmanyplayers = DB.getcountSelectet()
             courseid= DB.getCourseID(coursename)
@@ -77,6 +82,7 @@ Page {
                               playerstotalpar: mainPage.totalplayerpar[q]
                           })
         }
+
     }
 
     onStatusChanged: {
@@ -94,9 +100,12 @@ Page {
                                            nickname: nickname
                                        })
                 mainPage.globalindex = mainPage.globalindex + 1
+
+
+
+
             } else {
                 //console.log("Seite "+ basketnummer+ " ROUND ONE second ENTER");
-                basketnummerarray = basketnummer - 1
             }
 
             if (basketnummer === baskets) {
@@ -125,13 +134,109 @@ Page {
                                    mainPage.totalplayerpar[q])
             }
         }
+
+        //change font size of cover depending on how many players
+        if(howmanyplayers>4)
+        {
+            coverspacing=-40;
+            coverfontsize= Theme.fontSizeMedium
+
+         if(howmanyplayers>6)
+            {
+                coverspacing=-55;
+                coverfontsize= Theme.fontSizeExtraSmall
+            }
+        }
+        //activate roundCover
+
+        mainWindow.cover = roundCover
     }
+
+    Component {
+        id: roundCover
+        CoverBackground {
+            Rectangle {
+                id: rootcover
+                width: parent.width
+                height: parent.height
+                color: "#394264"
+            }
+
+            Image {
+                source: "../cover/background_coverround.png"
+                anchors.bottom: rootcover.bottom;
+                anchors.right: rootcover.right;
+                anchors.rightMargin:  Theme.paddingMedium;
+            }
+
+            Rectangle {
+                id: scocadigorect
+                width: rootcover.width
+                height: pageheader.height+Theme.paddingMedium
+                color:"#11a8ab"
+
+                Text {
+                    id: pageheader
+                    anchors { left: scocadigorect.left; leftMargin: Theme.paddingMedium; top:scocadigorect.top;topMargin:Theme.paddingMedium}
+                    font.family: bebasNeue.name
+                    color: "white"
+                    font.pixelSize: Theme.fontSizeExtraLarge
+                    font.bold: true
+                    text: "Bakset " + basketnummer + "/" + baskets
+                }
+            }
+
+
+            Rectangle {
+                id: parrect
+                width: par.width+Theme.paddingLarge+Theme.paddingLarge
+                anchors.top:scocadigorect.bottom
+                height: par.height+Theme.paddingSmall
+                color:"#11a8ab"
+
+                Text {
+                    id: par
+                    anchors { left: parrect.left;leftMargin: Theme.paddingMedium; top:parrect.top;topMargin: Theme.paddingSmall;}
+                    font.family: bebasNeue.name
+                    color: "white"
+                    font.pixelSize: Theme.fontSizeMedium
+                    font.bold: true
+                    text: "Par: " + basketpar
+                }
+            }
+
+            ListView{
+                id:coverlist
+                model: player
+                anchors.top: parrect.bottom;
+                anchors.topMargin: Theme.paddingLarge;
+                anchors.left: scocadigorect.left;
+                anchors.leftMargin: Theme.paddingMedium;
+                height:rootcover.height-scocadigorect.height;
+                spacing:coverspacing;
+                delegate: ListItem {
+
+                    Text {
+                        id: players
+                        font.family: bebasNeue.name
+                        color: "white"
+                        font.pixelSize: coverfontsize
+                        font.bold: true
+                        text:  nickname + " "+  player.get(index).playerstotalpar
+
+                    }
+
+                }
+            }
+  }
+    }
+
     Rectangle {
         id: root //it's a good idea to name it always root so I'm able to remember it everytime ;)
         width: parent.width
         height: parent.height
         color: "#394264"
-      //  color:"#11a8ab"
+        //  color:"#11a8ab"
     }
     SilicaFlickable {
         anchors.fill: round
@@ -196,7 +301,7 @@ Page {
                     color: "white"
                     font.pixelSize: Theme.fontSizeExtraLarge
                     text: "|Hole " + basketnummer + "/" + baskets
-                               + "|Par: " + basketpar + "|Av.: " + DB.getAverageBasket(coursename,basketnummer)+"|"
+                          + "|Par: " + basketpar + "|Av.: " + DB.getAverageBasket(coursename,basketnummer)+"|"
                 }
             }
         }
@@ -247,7 +352,7 @@ Page {
                                                mainPage.totalplayerpar[index])
                             mainPage.playersbasketpar[basketnummerarray][index]
                                     = (mainPage.playersbasketpar[basketnummerarray][index]) + 1
-                                    animateTextup.start();
+                            animateTextup.start();
 
                         }
                     }
@@ -279,7 +384,7 @@ Page {
                                                mainPage.totalplayerpar[index])
                             mainPage.playersbasketpar[basketnummerarray][index]
                                     = mainPage.playersbasketpar[basketnummerarray][index] - 1
-                                    animateTextdown.start();
+                            animateTextdown.start();
 
                         }
                     }

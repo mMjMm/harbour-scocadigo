@@ -24,6 +24,9 @@ Page {
     property var totalparplayer: []
     property var totalparplayerend: []
 
+    property int coverspacing:-20;
+    property int coverfontsize: Theme.fontSizeLarge
+
     FontLoader {
         id: bebasNeue
         source: "bebasNeue Regular.otf"
@@ -67,6 +70,22 @@ Page {
     }
 
     onStatusChanged: {
+
+
+        if(howmanyplayers>4)
+        {
+            coverspacing=-40;
+            coverfontsize= Theme.fontSizeMedium
+         if(howmanyplayers>6)
+            {
+                coverspacing=-55;
+                coverfontsize= Theme.fontSizeExtraSmall
+            }
+        }
+        mainWindow.cover = roundCover
+
+
+
         if (status === PageStatus.Activating) {
             for (var q = 0; q < howmanyplayers; q++) {
                 totalparplayerend[q] = totalparplayer[q] - totalparr
@@ -74,6 +93,11 @@ Page {
                                    mainPage.totalplayerpar[q])
             }
         }
+
+
+
+
+
         if (status === PageStatus.Active) {
             pageStack.pushAttached(Qt.resolvedUrl("Round_Scorecard.qml"), {
                                        coursename: coursename,
@@ -87,6 +111,91 @@ Page {
                                    })
         }
     }
+    Component {
+        id: roundCover
+        CoverBackground {
+            Rectangle {
+                id: rootcover
+                width: parent.width
+                height: parent.height
+                color: "#394264"
+            }
+
+            Image {
+                source: "../cover/background_cover.png"
+                anchors.bottom: rootcover.bottom;
+                anchors.right: rootcover.right;
+                anchors.rightMargin:  Theme.paddingMedium;
+            }
+
+            Rectangle {
+                id: scocadigorect
+                width: rootcover.width
+                height: pageheader.height+Theme.paddingMedium
+                color:"#11a8ab"
+
+                Text {
+                    id: pageheader
+                    anchors { left: scocadigorect.left; leftMargin: Theme.paddingMedium; top:scocadigorect.top;topMargin:Theme.paddingMedium}
+                    font.family: bebasNeue.name
+                    color: "white"
+                    font.pixelSize: Theme.fontSizeExtraLarge
+                    font.bold: true
+                    text: "Endresult:"
+                }
+            }
+
+
+            Rectangle {
+                id: parrect
+                width: par.width+Theme.paddingLarge+Theme.paddingLarge
+                anchors.top:scocadigorect.bottom
+                height: par.height+Theme.paddingSmall
+                color:"#11a8ab"
+
+                Text {
+                    id: par
+                    anchors { left: parrect.left;leftMargin: Theme.paddingMedium; top:parrect.top;topMargin: Theme.paddingSmall;}
+                    font.family: bebasNeue.name
+                    color: "white"
+                    font.pixelSize: Theme.fontSizeMedium
+                    font.bold: true
+                    text: "Time " + elapsedTime
+                }
+            }
+
+            ListView{
+                id:coverlist
+                model: player
+                anchors.top: parrect.bottom;
+                anchors.topMargin: Theme.paddingLarge;
+                anchors.left: scocadigorect.left;
+                anchors.leftMargin: Theme.paddingMedium;
+
+                height:rootcover.height-scocadigorect.height;
+                spacing:coverspacing;
+                delegate: ListItem {
+
+                    Text {
+                        id: players
+                        font.family: bebasNeue.name
+                        color: "white"
+                        font.pixelSize: coverfontsize
+                        font.bold: true
+                        text:  nickname + " "+  player.get(index).playerstotalpar
+                    }
+                }
+            }
+        }
+    }
+
+
+
+/////////////////////////////
+
+
+
+
 
     Rectangle {
         id: root //it's a good idea to name it always root so I'm able to remember it everytime ;)
