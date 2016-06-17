@@ -24,7 +24,7 @@ CoverBackground {
         width: root.width
         height: pageheader.height+Theme.paddingMedium
         color:"#11a8ab"
- Text {
+        Text {
             id: pageheader
             anchors { horizontalCenter: scocadigorect.horizontalCenter; top:scocadigorect.top;topMargin:Theme.paddingMedium}
             font.family: bebasNeue.name
@@ -56,7 +56,6 @@ CoverBackground {
                                },PageStackAction.Immediate)
                 pageStack.pushAttached(("../pages/NewGameCourses.qml"))
                 mainWindow.activate()
-
             }
         }
     }

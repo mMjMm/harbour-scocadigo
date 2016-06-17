@@ -22,8 +22,8 @@ Page {
     property int padding1_2:Theme.paddingLarge*1.2;
     property int paddinglarge12:Theme.paddingLarge*1.2
 
-   property int coverspacing:-20;
-   property int coverfontsize: Theme.fontSizeLarge
+    property int coverspacing:-20;
+    property int coverfontsize: Theme.fontSizeLarge
 
 
     FontLoader {
@@ -141,7 +141,7 @@ Page {
             coverspacing=-40;
             coverfontsize= Theme.fontSizeMedium
 
-         if(howmanyplayers>6)
+            if(howmanyplayers>6)
             {
                 coverspacing=-55;
                 coverfontsize= Theme.fontSizeExtraSmall
@@ -186,7 +186,6 @@ Page {
                 }
             }
 
-
             Rectangle {
                 id: parrect
                 width: par.width+Theme.paddingLarge+Theme.paddingLarge
@@ -228,7 +227,7 @@ Page {
 
                 }
             }
-  }
+        }
     }
 
     Rectangle {

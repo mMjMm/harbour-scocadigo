@@ -76,7 +76,7 @@ Page {
         {
             coverspacing=-40;
             coverfontsize= Theme.fontSizeMedium
-         if(howmanyplayers>6)
+            if(howmanyplayers>6)
             {
                 coverspacing=-55;
                 coverfontsize= Theme.fontSizeExtraSmall
@@ -191,7 +191,7 @@ Page {
 
 
 
-/////////////////////////////
+    /////////////////////////////
 
 
 

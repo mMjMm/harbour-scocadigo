@@ -115,23 +115,23 @@ Page {
             model: player
             delegate: ListItem {
                 id: delegate
-               // contentHeight: nameLabel.height+fullNameLabel.height+emailLabel.height+shotstatistics.height+Theme.paddingLarge*2
+                // contentHeight: nameLabel.height+fullNameLabel.height+emailLabel.height+shotstatistics.height+Theme.paddingLarge*2
                 contentHeight: names.height
                 width: names.width
                 visible: true
                 menu:ContextMenu {
-                           id: contextMenu
-                           width: delegate.width+Theme.paddingMedium
+                    id: contextMenu
+                    width: delegate.width+Theme.paddingMedium
 
-                           MenuItem {
-                               text: "Delete"
-                               onClicked: remove()
-                           }
-                           MenuItem {
-                               text: "Edit"
-                               onClicked: editplayer()
-                           }
-                       }
+                    MenuItem {
+                        text: "Delete"
+                        onClicked: remove()
+                    }
+                    MenuItem {
+                        text: "Edit"
+                        onClicked: editplayer()
+                    }
+                }
                 //DELETE FUNKTION (löscht gewählten namen aus der datenbank)
                 function remove() {
                     delegate.remorseAction("Deleting", function () {
@@ -153,7 +153,7 @@ Page {
                     width: screen.width - 50
                     height: nameLabel.height+fullNameLabel.height+emailLabel.height+shotstatistics.height+Theme.paddingLarge+Theme.paddingSmall
                     color: "#3c7ea7"
-                   // opacity: index % 2 == 0 ? 0.7 : 1
+                    // opacity: index % 2 == 0 ? 0.7 : 1
 
                 }
 
