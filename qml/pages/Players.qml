@@ -229,9 +229,6 @@ Page {
                                           notesEdit: notes
                                       })
                 }
-
-
-
             }
         }
     }
