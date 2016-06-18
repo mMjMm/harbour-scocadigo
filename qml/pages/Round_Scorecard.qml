@@ -24,14 +24,19 @@ Page {
     property var howmanyplayers
     property int n
     property int q
-    property var npar:1
+    property int npar:1
     property var nickNAME: []
     property var spielerID:[]
     property var basketParArray: []
     property var playersTotalPar: []
     property var totalparplayer: []
     property var totalparplayerend: []
-    property var contetnwidht
+    //property var contetnwidht
+
+    property int fontsize: Theme.fontSizeExtraSmall;
+    property int marginrect:Theme.paddingMedium;
+    property int margincircle:Theme.paddingSmall;
+
 
     FontLoader {
         id: bebasNeue
@@ -42,10 +47,8 @@ Page {
         source: "fontawesome-webfont.ttf"
     }
 
-
     function date()
     {
-
         //GET DATE to be saved in the database
         var today = new Date()
         var dd = today.getDate()
@@ -66,7 +69,6 @@ Page {
         minutes = minutes < 10 ? '0'+minutes : minutes;
         var strTime = hours + ':' + minutes + ' ' + ampm;
         today = yyyy + '-' + mm + '-' + dd +'  ' +strTime;
-
         return today;
     }
     function reset() {
@@ -109,7 +111,6 @@ Page {
         }
         DB.updatePLAYED(coursename)           //plus one played
         DB.updatePLAYEDROUNDSplayer(elapsed2) //save time played
-
     }
 
     Component.onCompleted: {
@@ -119,12 +120,36 @@ Page {
             totalparplayerend[q] = 0
             spielerID[q]=DB.getspielerIDfromName(nickNAME[q]);
         }
-
+        /*
         if(baskets>27)
         {
             contetnwidht=screen.heigth*2
         }
         else contetnwidht=screen.heigth*1.5
+        */
+
+        if(howmanyplayers<=8)
+        {
+            marginrect=marginrect+1
+            margincircle=margincircle+1
+            fontsize=fontsize+2
+        }
+
+        if(howmanyplayers===9)
+        {
+            marginrect=marginrect
+            margincircle=margincircle
+            fontsize=fontsize-1
+
+        }
+
+        if(howmanyplayers>=10)
+        {
+            fontsize=fontsize-5
+            marginrect=marginrect-1
+            margincircle=margincircle-1
+        }
+
         // console.log("today + courseID + played time ")
         //write basic results into table resutlBasic (RES_ID; DATE; TIME_PLAYED)
         for (n = 0; n < baskets; n++) {
@@ -149,8 +174,6 @@ Page {
                                players: nickNAME[q]
                            })
         }
-
-
     }
 
     ListModel {
@@ -172,11 +195,9 @@ Page {
         color: "#394264"
     }
 
-
     SilicaFlickable {
         id: pullflick
         anchors.fill: root
-
 
         PullDownMenu {
             MenuItem {
@@ -192,8 +213,6 @@ Page {
                 }
             }
         }
-
-
 
         Rectangle {
             id: topnewgame
@@ -242,10 +261,8 @@ Page {
             }
         }
 
-
         Rectangle{
             id:resultbackground
-
             width:playerrectback.width+totalrectback.width+flickable.width+Theme.paddingLarge
             height:playerrectback.height+playercolumn.height+Theme.paddingLarge+Theme.paddingLarge
             anchors{ top:topnewgame.bottom; topMargin: Theme.paddingSmall; leftMargin:Theme.paddingLarge}
@@ -256,8 +273,8 @@ Page {
         Rectangle{
             id:playerrectback
             anchors{ top:topnewgame.bottom; topMargin: Theme.paddingLarge; leftMargin:Theme.paddingLarge}
-            width: playerlabel.width+Theme.paddingLarge
-            height: playerlabel.height+Theme.paddingLarge
+            width: playerlabel.width+marginrect
+            height: playerlabel.height+marginrect
             color: "#3a8499"
 
         }
@@ -266,7 +283,7 @@ Page {
             font.family: bebasNeue.name
             anchors{horizontalCenter: playerrectback.horizontalCenter; verticalCenterOffset:4;verticalCenter: playerrectback.verticalCenter}
             color: "white"
-            font.pixelSize: Theme.fontSizeExtraSmall
+            font.pixelSize: fontsize
             font.bold: true
             text:"player "
 
@@ -275,8 +292,8 @@ Page {
         Rectangle{
             id:totalrectback
             anchors{ left:playerrectback.right; baseline:playerrectback.baseline;leftMargin:Theme.paddingSmall}
-            width: playerlabel.width+Theme.paddingLarge
-            height: totallabel.height+Theme.paddingLarge
+            width: playerlabel.width+marginrect
+            height: totallabel.height+marginrect
             color: "#3a8499"
 
         }
@@ -285,11 +302,12 @@ Page {
             font.family: bebasNeue.name
             anchors{horizontalCenter: totalrectback.horizontalCenter; verticalCenterOffset:4;verticalCenter: totalrectback.verticalCenter}
             color: "white"
-            font.pixelSize: Theme.fontSizeExtraSmall
+            font.pixelSize: fontsize
             font.bold: true
             text:"total "
 
         }
+
         Column{
             id:playercolumn
             anchors{ top: totalrectback.bottom;topMargin:Theme.paddingMedium}
@@ -299,8 +317,8 @@ Page {
                 model: players
                 Rectangle {
                     id: playernamerect
-                    width: playerlabel.width+Theme.paddingLarge
-                    height: playerlabel.height+Theme.paddingLarge
+                    width: playerlabel.width+marginrect
+                    height: playerlabel.height+marginrect
                     color: "#3a8499"
                     Label {
                         id: pars
@@ -308,7 +326,7 @@ Page {
                         font.family: bebasNeue.name
                         font.bold: true
                         color: "white"
-                        font.pixelSize: Theme.fontSizeExtraSmall
+                        font.pixelSize: fontsize
                         text: modelData
                     }
                 }
@@ -324,8 +342,8 @@ Page {
                 model: playerstotalpar
                 Rectangle {
                     id: playertotalparrect
-                    width: ((playerlabel.width+Theme.paddingLarge)/2)-1.5
-                    height: playerlabel.height+Theme.paddingLarge
+                    width: ((playerlabel.width+marginrect)/2)-1.5
+                    height: playerlabel.height+marginrect
                     color: "#394264"
                     Label {
                         id: totalpars
@@ -333,7 +351,7 @@ Page {
                         font.family: bebasNeue.name
                         font.bold: true
                         color: "white"
-                        font.pixelSize: Theme.fontSizeExtraSmall
+                        font.pixelSize: fontsize
                         text: totalpar+modelData
                     }
                 }
@@ -349,8 +367,8 @@ Page {
                 model: playerstotalpar
                 Rectangle {
                     id: playertotalparrect2
-                    width: ((playerlabel.width+Theme.paddingLarge)/2)-1.5
-                    height: playerlabel.height+Theme.paddingLarge
+                    width: ((playerlabel.width+marginrect)/2)-1.5
+                    height: playerlabel.height+marginrect
                     color: "#394264"
                     Label {
                         id: totalpars2
@@ -358,23 +376,22 @@ Page {
                         font.family: bebasNeue.name
                         font.bold: true
                         color: "white"
-                        font.pixelSize: Theme.fontSizeExtraSmall
+                        font.pixelSize: fontsize
                         text: modelData
                     }
                 }
             }
         }
 
-      //SilicaFlickable {
-          Flickable  {
+        //SilicaFlickable {
+        Flickable  {
             id: flickable
             anchors{left:totalrectback.right; baseline:totalrectback.baseline;leftMargin:Theme.paddingMedium}
             height: root.height
-            width: basketrow.width
-
-
-            contentWidth: contetnwidht
-            contentHeight:   basketrow.height
+            width: root.width
+            //contentWidth: contetnwidht
+            contentWidth: basketrow.width*1.2;
+            contentHeight:resultbackground.height
             flickableDirection: Flickable.HorizontalFlick
 
             HorizontalScrollDecorator {
@@ -382,7 +399,6 @@ Page {
             }
             clip: true
             boundsBehavior: Flickable.DragAndOvershootBounds
-
 
             Row{
                 id:basketrow
@@ -393,8 +409,8 @@ Page {
                     model: baskets
                     Rectangle {
                         id: basketsrect
-                        width: blindlabel.height+Theme.paddingLarge
-                        height: blindlabel.height+Theme.paddingLarge
+                        width: blindlabel.height+marginrect
+                        height: blindlabel.height+marginrect
                         color: "#3a8499"
                         Label {
                             id: basketslabel
@@ -402,7 +418,7 @@ Page {
                             font.family: bebasNeue.name
                             font.bold: true
                             color: "white"
-                            font.pixelSize: Theme.fontSizeExtraSmall
+                            font.pixelSize: fontsize
                             text: index + 1
                         }
                         Label {
@@ -411,7 +427,7 @@ Page {
                             font.family: bebasNeue.name
                             font.bold: true
                             color: "#3a8499"
-                            font.pixelSize: Theme.fontSizeExtraSmall
+                            font.pixelSize: fontsize
                             text: "    "
                         }
                     }
@@ -427,17 +443,16 @@ Page {
                 Repeater {
                     model:result
                     Rectangle{
-                        width: blindlabel2.height+Theme.paddingLarge
-                        height: blindlabel2.height+Theme.paddingLarge
+                        width: blindlabel2.height+marginrect
+                        height: blindlabel2.height+marginrect
                         color:"#394264"
-
 
                         Rectangle {
                             id: resultrect
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
-                            width: blindlabel2.height+Theme.paddingMedium
-                            height: blindlabel2.height+Theme.paddingMedium
+                            width: blindlabel2.height+margincircle
+                            height: blindlabel2.height+margincircle
                             radius:{
                                 if (modelData <= -1) {
                                     resultrect.radius = 100
@@ -446,7 +461,6 @@ Page {
                                 else
                                     resultrect.radius = 0
                             }
-
                             color: {
                                 if (modelData <= -1) {
                                     resultrect.color = "#517b50"
@@ -468,7 +482,7 @@ Page {
                                 font.family: bebasNeue.name
                                 font.bold: true
                                 color: "white"
-                                font.pixelSize: Theme.fontSizeExtraSmall
+                                font.pixelSize: fontsize
                                 text: modelData
                             }
                             Label {
@@ -477,13 +491,14 @@ Page {
                                 font.family: bebasNeue.name
                                 font.bold: true
                                 color: "#394264"
-                                font.pixelSize: Theme.fontSizeExtraSmall
+                                font.pixelSize: fontsize
+
                                 text: "    "
                             }
                         }
                     }
                 }
             }
-       }
+        }
     }
 }
