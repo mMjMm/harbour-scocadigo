@@ -143,6 +143,17 @@ Page {
 
             if(howmanyplayers>6)
             {
+                coverspacing=-45;
+                coverfontsize= Theme.fontSizeSmall
+            }
+
+            if(howmanyplayers>7)
+            {
+                coverspacing=-50;
+                coverfontsize= Theme.fontSizeExtraSmall
+            }
+            if(howmanyplayers>8)
+            {
                 coverspacing=-55;
                 coverfontsize= Theme.fontSizeExtraSmall
             }
@@ -212,7 +223,9 @@ Page {
                 anchors.left: scocadigorect.left;
                 anchors.leftMargin: Theme.paddingMedium;
                 height:rootcover.height-scocadigorect.height;
+                width: roundCover.width/2.5
                 spacing:coverspacing;
+
                 delegate: ListItem {
 
                     Text {
@@ -221,10 +234,37 @@ Page {
                         color: "white"
                         font.pixelSize: coverfontsize
                         font.bold: true
-                        text:  nickname + " "+  player.get(index).playerstotalpar
+                        text:  nickname
 
                     }
 
+                }
+            }
+
+
+            ListView{
+                id:coverlists
+                model: player
+                anchors.top: parrect.bottom;
+                anchors.topMargin: Theme.paddingLarge;
+                anchors.right: scocadigorect.right;
+                anchors.rightMargin: Theme.paddingLarge;
+                width: roundCover.width/3.2
+                height:rootcover.height-scocadigorect.height;
+                spacing:coverspacing;
+
+                delegate: ListItem {
+
+                    Text {
+                        id: playerpar
+                        font.family: bebasNeue.name
+                        color: "white"
+                        font.pixelSize: coverfontsize
+                        font.bold: true
+                        width:parent.width
+                        horizontalAlignment:Text.AlignRight
+                        text: player.get(index).playerstotalpar
+                    }
                 }
             }
         }

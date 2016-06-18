@@ -72,11 +72,25 @@ Page {
     onStatusChanged: {
 
 
+        //change font size of cover depending on how many players
         if(howmanyplayers>4)
         {
             coverspacing=-40;
             coverfontsize= Theme.fontSizeMedium
+
             if(howmanyplayers>6)
+            {
+                coverspacing=-45;
+                coverfontsize= Theme.fontSizeSmall
+            }
+
+            if(howmanyplayers>7)
+            {
+                coverspacing=-50;
+                coverfontsize= Theme.fontSizeExtraSmall
+            }
+
+            if(howmanyplayers>8)
             {
                 coverspacing=-55;
                 coverfontsize= Theme.fontSizeExtraSmall
@@ -111,6 +125,7 @@ Page {
                                    })
         }
     }
+
     Component {
         id: roundCover
         CoverBackground {
@@ -122,7 +137,7 @@ Page {
             }
 
             Image {
-                source: "../cover/background_cover.png"
+                source: "../cover/background_coverround.png"
                 anchors.bottom: rootcover.bottom;
                 anchors.right: rootcover.right;
                 anchors.rightMargin:  Theme.paddingMedium;
@@ -145,7 +160,6 @@ Page {
                 }
             }
 
-
             Rectangle {
                 id: parrect
                 width: par.width+Theme.paddingLarge+Theme.paddingLarge
@@ -160,7 +174,7 @@ Page {
                     color: "white"
                     font.pixelSize: Theme.fontSizeMedium
                     font.bold: true
-                    text: "Time " + elapsedTime
+                    text: "Time: " + elapsedTime
                 }
             }
 
@@ -171,9 +185,10 @@ Page {
                 anchors.topMargin: Theme.paddingLarge;
                 anchors.left: scocadigorect.left;
                 anchors.leftMargin: Theme.paddingMedium;
-
                 height:rootcover.height-scocadigorect.height;
+                width: roundCover.width/2.5
                 spacing:coverspacing;
+
                 delegate: ListItem {
 
                     Text {
@@ -182,13 +197,41 @@ Page {
                         color: "white"
                         font.pixelSize: coverfontsize
                         font.bold: true
-                        text:  nickname + " "+  player.get(index).playerstotalpar
+                        text:  nickname
+
+                    }
+
+                }
+            }
+
+
+            ListView{
+                id:coverlists
+                model: player
+                anchors.top: parrect.bottom;
+                anchors.topMargin: Theme.paddingLarge;
+                anchors.right: scocadigorect.right;
+                anchors.rightMargin: Theme.paddingLarge;
+                width: roundCover.width/3.2
+                height:rootcover.height-scocadigorect.height;
+                spacing:coverspacing;
+
+                delegate: ListItem {
+
+                    Text {
+                        id: playerpar
+                        font.family: bebasNeue.name
+                        color: "white"
+                        font.pixelSize: coverfontsize
+                        font.bold: true
+                        width:parent.width
+                        horizontalAlignment:Text.AlignRight
+                        text: player.get(index).playerstotalpar
                     }
                 }
             }
         }
     }
-
 
 
     /////////////////////////////
