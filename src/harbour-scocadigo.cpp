@@ -25,13 +25,21 @@ SOFTWARE.
 
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
+
 #endif
 
 #include <sailfishapp.h>
+#include "settings.h"
+#include <QQmlContext>
+#include <QQuickView>
+#include <QGuiApplication>
 
 
 int main(int argc, char *argv[])
 {
+     QGuiApplication *app = SailfishApp::application(argc, argv);
+     QQuickView *view = SailfishApp::createView();
+     Settings *settings = new Settings();
     // SailfishApp::main() will display "qml/template.qml", if you need more
     // control over initialization, you can use:
     //
@@ -41,6 +49,10 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
-    return SailfishApp::main(argc, argv);
+     view->rootContext()->setContextProperty("settings", settings);
+     view->setSource(SailfishApp::pathTo("qml/harbour-scocadigo.qml"));
+     view->showFullScreen();
+ return app->exec();
 }
+
 
