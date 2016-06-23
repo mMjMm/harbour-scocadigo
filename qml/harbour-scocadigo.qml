@@ -27,9 +27,29 @@ ApplicationWindow
     id: mainWindow
     initialPage: mainPage
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    property var transparency
+    property var tabsound
 
     Component.onCompleted: {
+
         //  DB.initialize();
+
+        transparency=settings.setting("transparency");
+
+        if(typeof transparency=="undefined")
+        {
+            console.log("WELCOME TO °SCOCADIGO°")
+            settings.setSetting("transparency",1)
+        }
+
+        tabsound=settings.setting("tabsound");
+
+        if(typeof tabsound=="undefined")
+        {
+            settings.setSetting("tabsound", 1)
+        }
+
+
     }
     FirstPage {
         id: mainPage
@@ -45,8 +65,7 @@ ApplicationWindow
         property int maximum: 6
 
 
+
+
     }
-
-
-
 }

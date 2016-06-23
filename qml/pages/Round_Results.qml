@@ -27,6 +27,8 @@ Page {
     property int coverspacing:-20;
     property int coverfontsize: Theme.fontSizeLarge
 
+    property var transparency
+
     FontLoader {
         id: bebasNeue
         source: "bebasNeue Regular.otf"
@@ -71,7 +73,6 @@ Page {
 
     onStatusChanged: {
 
-
         //change font size of cover depending on how many players
         if(howmanyplayers>4)
         {
@@ -96,10 +97,8 @@ Page {
                 coverfontsize= Theme.fontSizeExtraSmall
             }
         }
+        //ROUNDCOVER
         mainWindow.cover = roundCover
-
-
-
         if (status === PageStatus.Activating) {
             for (var q = 0; q < howmanyplayers; q++) {
                 totalparplayerend[q] = totalparplayer[q] - totalparr
@@ -107,10 +106,6 @@ Page {
                                    mainPage.totalplayerpar[q])
             }
         }
-
-
-
-
 
         if (status === PageStatus.Active) {
             pageStack.pushAttached(Qt.resolvedUrl("Round_Scorecard.qml"), {
@@ -129,11 +124,13 @@ Page {
     Component {
         id: roundCover
         CoverBackground {
+
             Rectangle {
                 id: rootcover
                 width: parent.width
                 height: parent.height
                 color: "#394264"
+                opacity: settings.setting("transparency");
             }
 
             Image {
@@ -142,12 +139,16 @@ Page {
                 anchors.right: rootcover.right;
                 anchors.rightMargin:  Theme.paddingMedium;
             }
-
-            Rectangle {
+            Item{
                 id: scocadigorect
                 width: rootcover.width
                 height: pageheader.height+Theme.paddingMedium
-                color:"#11a8ab"
+                Rectangle {
+
+                    anchors.fill: parent
+                    opacity: settings.setting("transparency");
+                    color:"#11a8ab"
+                }
 
                 Text {
                     id: pageheader
@@ -156,17 +157,22 @@ Page {
                     color: "white"
                     font.pixelSize: Theme.fontSizeExtraLarge
                     font.bold: true
-                    text: "Endresult:"
+                    opacity: 1
+                    text: qsTr("Endresult:")
                 }
             }
 
-            Rectangle {
+            Item{
                 id: parrect
                 width: par.width+Theme.paddingLarge+Theme.paddingLarge
                 anchors.top:scocadigorect.bottom
                 height: par.height+Theme.paddingSmall
-                color:"#11a8ab"
 
+                Rectangle {
+                    anchors.fill: parent
+                    color:"#11a8ab"
+                    opacity: settings.setting("transparency");
+                }
                 Text {
                     id: par
                     anchors { left: parrect.left;leftMargin: Theme.paddingMedium; top:parrect.top;topMargin: Theme.paddingSmall;}
@@ -174,10 +180,10 @@ Page {
                     color: "white"
                     font.pixelSize: Theme.fontSizeMedium
                     font.bold: true
-                    text: "Time: " + elapsedTime
+                    opacity: 1
+                    text: qsTr("Time: ") + elapsedTime
                 }
             }
-
             ListView{
                 id:coverlist
                 model: player
@@ -198,12 +204,10 @@ Page {
                         font.pixelSize: coverfontsize
                         font.bold: true
                         text:  nickname
-
+                        opacity: 1
                     }
-
                 }
             }
-
 
             ListView{
                 id:coverlists
@@ -227,24 +231,21 @@ Page {
                         width:parent.width
                         horizontalAlignment:Text.AlignRight
                         text: player.get(index).playerstotalpar
+                        opacity: 1
                     }
                 }
             }
         }
     }
 
-
     /////////////////////////////
-
-
-
-
 
     Rectangle {
         id: root //it's a good idea to name it always root so I'm able to remember it everytime ;)
         width: parent.width
         height: parent.height
         color: "#394264"
+        opacity: settings.setting("transparency");
     }
 
     SilicaFlickable {
@@ -255,13 +256,16 @@ Page {
             width: root.width
             spacing: 3
 
-            Rectangle {
+            Item{
                 id: topnewgame
                 width: root.width
                 height: pageheader.height
-                color: "#50597b"
 
-
+                Rectangle {
+                    anchors.fill: parent
+                    color: "#50597b"
+                    opacity: settings.setting("transparency");
+                }
                 Image {
                     id: newgameicon
                     x: Theme.paddingLarge*2
@@ -273,28 +277,36 @@ Page {
 
                 Label {
                     id: pageheader
-                    anchors{top:topnewgame.top;topMargin: Theme.paddingMedium;left: newgameicon.right;leftMargin: Theme.paddingMedium}
+                    width: screen.width-(newgameicon.width*3.2)
                     font.family: bebasNeue.name
-                    color: "white"
+                    anchors{top:topnewgame.top;topMargin:Theme.paddingMedium;left:newgameicon.right;leftMargin:Theme.paddingMedium}
                     font.pixelSize: Theme.fontSizeExtraLarge+Theme.fontSizeSmall
-                    text: coursename
+                    color: "white"
+                    opacity: 1
                     font.bold: true
-
+                    truncationMode: TruncationMode.Fade
+                    text: coursename
                 }
                 Label {
                     font.family: bebasNeue.name
-                    anchors{baseline: pageheader.baseline;left: pageheader.right;leftMargin:Theme.paddingSmall}
+                    anchors{baseline: pageheader.baseline;right: topnewgame.right;rightMargin: Theme.paddingLarge+Theme.paddingSmall}
                     color: "white"
                     font.pixelSize: Theme.fontSizeSmall
+                    opacity: 1
                     text: " (" + totalpar + ")"
                 }
             }
-            Rectangle {
+
+            Item{
+
                 id: infolabelpars
                 width: label.width+ timelabel.width+Theme.paddingLarge*2
                 height: label.height
-                color: "#50597b"
-
+                Rectangle {
+                    anchors.fill: parent
+                    opacity: settings.setting("transparency");
+                    color: "#50597b"
+                }
                 Label {
                     id: label
                     x: Theme.paddingLarge
@@ -302,8 +314,8 @@ Page {
                     anchors{top: infolabelpars.top;topMargin: Theme.paddingSmall}
                     color: "white"
                     font.pixelSize: Theme.fontSizeExtraLarge
+                    opacity: 1
                     text: qsTr("ENDRESULTS:")
-
                 }
 
                 Label {
@@ -312,6 +324,7 @@ Page {
                     anchors{left: label.right;leftMargin: Theme.paddingSmall;bottom:label.bottom;bottomMargin: Theme.paddingSmall}
                     color: "white"
                     font.pixelSize: Theme.fontSizeLarge
+                    opacity: 1
                     text: elapsedTime
                 }
             }
@@ -340,50 +353,60 @@ Page {
                 width: names.width
                 height: names.height
 
-                Rectangle {
+                Item{
                     id: names
                     width: screen.width - 50
                     height: parent.height
-                    color: "#50597b"
-                }
 
-                Label {
-                    id: nameLabel
-                    anchors{top: names.top;topMargin: Theme.paddingMedium;left: names.left;leftMargin: Theme.paddingMedium}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeExtraLarge
-                    font.bold: false
-                    text: nickname
-                }
-                Label {
-                    id: personalBest
-                    anchors{top: nameLabel.bottom;left: names.left;leftMargin: Theme.paddingMedium}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "Top- score: " + DB.getBestplayerCourse(coursename,nickname)
-                }
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "#50597b"
+                        opacity: settings.setting("transparency");
+                    }
 
-                Label {
-                    id: personalAverage
-                    anchors{left: names.left;leftMargin: Theme.paddingMedium;top: personalBest.bottom}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "Average-score: " + DB.getAveragePlayerCourse(nickname,coursename)
-                }
-                Label {
-                    id: personalNumberPlayed
-                    anchors{left: names.left;leftMargin: Theme.paddingMedium;top: personalAverage.bottom}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "Number-played: " + DB.getAmountPlayedPlayer(coursename, nickname)
-                }
-                Label {
-                    id: endresult
-                    anchors{right: names.right;rightMargin: Theme.paddingLarge;verticalCenter: names.verticalCenter;verticalCenterOffset: Theme.paddingLarge}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeExtraLarge + 80
-                    font.bold: true
-                    text: player.get(index).playerstotalpar
+                    Label {
+                        id: nameLabel
+                        anchors{top: names.top;topMargin: Theme.paddingMedium;left: names.left;leftMargin: Theme.paddingMedium}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraLarge
+                        font.bold: false
+                        opacity: 1
+                        text: nickname
+                    }
+                    Label {
+                        id: personalBest
+                        anchors{top: nameLabel.bottom;left: names.left;leftMargin: Theme.paddingMedium}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeSmall
+                        opacity: 1
+                        text: qsTr("Top- score: ") + DB.getBestplayerCourse(coursename,nickname)
+                    }
+
+                    Label {
+                        id: personalAverage
+                        anchors{left: names.left;leftMargin: Theme.paddingMedium;top: personalBest.bottom}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeSmall
+                        opacity: 1
+                        text: qsTr("Average-score: ")+ DB.getAveragePlayerCourse(nickname,coursename)
+                    }
+                    Label {
+                        id: personalNumberPlayed
+                        anchors{left: names.left;leftMargin: Theme.paddingMedium;top: personalAverage.bottom}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeSmall
+                        opacity: 1
+                        text: qsTr("Number-played: ") + DB.getAmountPlayedPlayer(coursename, nickname)
+                    }
+                    Label {
+                        id: endresult
+                        anchors{right: names.right;rightMargin: Theme.paddingLarge;verticalCenter: names.verticalCenter;verticalCenterOffset: Theme.paddingLarge}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraLarge + 80
+                        font.bold: true
+                        opacity: 1
+                        text: player.get(index).playerstotalpar
+                    }
                 }
             }
         }

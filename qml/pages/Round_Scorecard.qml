@@ -37,6 +37,7 @@ Page {
     property int marginrect:Theme.paddingMedium;
     property int margincircle:Theme.paddingSmall;
 
+    property var transparency
 
     FontLoader {
         id: bebasNeue
@@ -120,13 +121,6 @@ Page {
             totalparplayerend[q] = 0
             spielerID[q]=DB.getspielerIDfromName(nickNAME[q]);
         }
-        /*
-        if(baskets>27)
-        {
-            contetnwidht=screen.heigth*2
-        }
-        else contetnwidht=screen.heigth*1.5
-        */
 
         if(howmanyplayers<=8)
         {
@@ -192,6 +186,7 @@ Page {
         id: root //it's a good idea to name it always root so I'm able to remember it everytime ;)
         width: parent.width
         height: parent.height
+        opacity: settings.setting("transparency");
         color: "#394264"
     }
 
@@ -201,25 +196,29 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: qsTr("CANCEL Round")
+                text: qsTr("CANCEL ROUND")
                 onClicked: {
                     reset()
                 }
             }
             MenuItem {
-                text: qsTr("SAVE Round")
+                text: qsTr("SAVE ROUND")
                 onClicked: {
                     save();
                 }
             }
         }
 
-        Rectangle {
+        Item{
             id: topnewgame
             width: root.width
             height: newgameicon.height+1.5*Theme.paddingLarge
-            color: "#50597b"
 
+            Rectangle {
+                anchors.fill: parent
+                opacity: settings.setting("transparency");
+                color: "#50597b"
+            }
             Image {
                 id: newgameicon
                 x: Theme.paddingLarge*2
@@ -230,12 +229,15 @@ Page {
             }
             Label {
                 id: pageheader
+                width: root.width-(root.width/2.5)
                 anchors{top:topnewgame.top;topMargin: Theme.paddingLarge;bottomMargin:Theme.paddingLarge;left:newgameicon.right;leftMargin: Theme.paddingMedium}
                 font.family: bebasNeue.name
                 color: "white"
                 font.bold: true
-                font.pixelSize:screen.width/8
-                text: "scorecard " + coursename
+                font.pixelSize:screen.width/9
+                opacity: 1
+                truncationMode: TruncationMode.Fade
+                text: qsTr("scorecard ") + coursename
 
             }
             Label {
@@ -245,8 +247,8 @@ Page {
                 color: "white"
                 font.pixelSize: Theme.fontSizeSmall
                 font.bold: true
+                opacity: 1
                 text: " (" + totalpar + ")"
-
             }
 
             Label {
@@ -255,9 +257,9 @@ Page {
                 anchors{baseline: pageheader.baseline;right: topnewgame.right; rightMargin: Theme.paddingLarge; }
                 color: "white"
                 font.pixelSize: Theme.fontSizeSmall
+                opacity: 1
                 font.bold: true
                 text:date() + " "
-
             }
         }
 
@@ -267,15 +269,16 @@ Page {
             height:playerrectback.height+playercolumn.height+Theme.paddingLarge+Theme.paddingLarge
             anchors{ top:topnewgame.bottom; topMargin: Theme.paddingSmall; leftMargin:Theme.paddingLarge}
             color:"#50597b"
+            opacity: settings.setting("transparency");
         }
-
 
         Rectangle{
             id:playerrectback
             anchors{ top:topnewgame.bottom; topMargin: Theme.paddingLarge; leftMargin:Theme.paddingLarge}
-            width: playerlabel.width+marginrect
+            width: playerlabel.width+marginrect+Theme.paddingMedium
             height: playerlabel.height+marginrect
             color: "#3a8499"
+            opacity: settings.setting("transparency");
 
         }
         Label {
@@ -285,7 +288,8 @@ Page {
             color: "white"
             font.pixelSize: fontsize
             font.bold: true
-            text:"player "
+            opacity: 1
+            text:qsTr("player ")
 
         }
 
@@ -294,6 +298,7 @@ Page {
             anchors{ left:playerrectback.right; baseline:playerrectback.baseline;leftMargin:Theme.paddingSmall}
             width: playerlabel.width+marginrect
             height: totallabel.height+marginrect
+            opacity: settings.setting("transparency");
             color: "#3a8499"
 
         }
@@ -304,8 +309,8 @@ Page {
             color: "white"
             font.pixelSize: fontsize
             font.bold: true
-            text:"total "
-
+            opacity: 1
+            text:qsTr("total ")
         }
 
         Column{
@@ -315,17 +320,24 @@ Page {
             Repeater {
                 id: playersrepeater
                 model: players
-                Rectangle {
+                Item{
                     id: playernamerect
-                    width: playerlabel.width+marginrect
+                    width: playerlabel.width+marginrect+Theme.paddingMedium
                     height: playerlabel.height+marginrect
-                    color: "#3a8499"
+                    Rectangle {
+                        anchors.fill: parent
+                        opacity: settings.setting("transparency");
+                        color: "#3a8499"
+                    }
                     Label {
                         id: pars
                         anchors{centerIn: parent; verticalCenterOffset:4}
+                        width: parent.width-Theme.paddingSmall
+
                         font.family: bebasNeue.name
                         font.bold: true
                         color: "white"
+                        opacity: 1
                         font.pixelSize: fontsize
                         text: modelData
                     }
@@ -340,17 +352,26 @@ Page {
             Repeater {
                 id: playertotalparrepeater
                 model: playerstotalpar
-                Rectangle {
+
+                Item{
+
                     id: playertotalparrect
                     width: ((playerlabel.width+marginrect)/2)-1.5
                     height: playerlabel.height+marginrect
-                    color: "#394264"
+
+
+                    Rectangle {
+                        anchors.fill: parent
+                        opacity: settings.setting("transparency");
+                        color: "#394264"
+                    }
                     Label {
                         id: totalpars
                         anchors{centerIn: parent; verticalCenterOffset:4}
                         font.family: bebasNeue.name
                         font.bold: true
                         color: "white"
+                        opacity: 1
                         font.pixelSize: fontsize
                         text: totalpar+modelData
                     }
@@ -365,17 +386,23 @@ Page {
             Repeater {
                 id: playertotalparrepeater2
                 model: playerstotalpar
-                Rectangle {
+                Item{
                     id: playertotalparrect2
                     width: ((playerlabel.width+marginrect)/2)-1.5
                     height: playerlabel.height+marginrect
-                    color: "#394264"
+
+                    Rectangle {
+                        anchors.fill: parent
+                        opacity: settings.setting("transparency");
+                        color: "#394264"
+                    }
                     Label {
                         id: totalpars2
                         anchors{centerIn: parent; verticalCenterOffset:4}
                         font.family: bebasNeue.name
                         font.bold: true
                         color: "white"
+                        opacity: 1
                         font.pixelSize: fontsize
                         text: modelData
                     }
@@ -389,7 +416,6 @@ Page {
             anchors{left:totalrectback.right; baseline:totalrectback.baseline;leftMargin:Theme.paddingMedium}
             height: root.height
             width: root.width
-            //contentWidth: contetnwidht
             contentWidth: basketrow.width*1.2;
             contentHeight:resultbackground.height
             flickableDirection: Flickable.HorizontalFlick
@@ -402,22 +428,29 @@ Page {
 
             Row{
                 id:basketrow
-                //anchors{left:totalrectback.right; baseline:totalrectback.baseline;leftMargin:Theme.paddingSmall}
                 spacing:4
                 Repeater {
                     id: basketsrepeater
                     model: baskets
-                    Rectangle {
+
+                    Item{
                         id: basketsrect
                         width: blindlabel.height+marginrect
                         height: blindlabel.height+marginrect
-                        color: "#3a8499"
+
+                        Rectangle {
+                            anchors.fill: parent
+                            opacity: settings.setting("transparency");
+                            color: "#3a8499"
+
+                        }
                         Label {
                             id: basketslabel
                             anchors{centerIn: parent; verticalCenterOffset:4}
                             font.family: bebasNeue.name
                             font.bold: true
                             color: "white"
+                            opacity: 1
                             font.pixelSize: fontsize
                             text: index + 1
                         }
@@ -427,6 +460,7 @@ Page {
                             font.family: bebasNeue.name
                             font.bold: true
                             color: "#3a8499"
+                            opacity: 1
                             font.pixelSize: fontsize
                             text: "    "
                         }
@@ -442,21 +476,28 @@ Page {
                 flow :Grid.TopToBottom
                 Repeater {
                     model:result
-                    Rectangle{
+                    Item{
                         width: blindlabel2.height+marginrect
                         height: blindlabel2.height+marginrect
-                        color:"#394264"
+                        Rectangle{
+                            anchors.fill: parent
+                            color:"#394264"
+                            opacity: settings.setting("transparency");
+                        }
 
-                        Rectangle {
-                            id: resultrect
+                        Item{
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             width: blindlabel2.height+margincircle
                             height: blindlabel2.height+margincircle
+
+                        Rectangle {
+                            id: resultrect
+                            anchors.fill: parent
+                            opacity: settings.setting("transparency");
                             radius:{
                                 if (modelData <= -1) {
                                     resultrect.radius = 100
-
                                 }
                                 else
                                     resultrect.radius = 0
@@ -475,13 +516,14 @@ Page {
                                     resultrect.color = "#394264"
                                 }
                             }
-
+                               }
                             Label {
                                 id: resultlabel
                                 anchors{centerIn: parent; verticalCenterOffset:4}
                                 font.family: bebasNeue.name
                                 font.bold: true
                                 color: "white"
+                                opacity:1
                                 font.pixelSize: fontsize
                                 text: modelData
                             }
@@ -492,7 +534,7 @@ Page {
                                 font.bold: true
                                 color: "#394264"
                                 font.pixelSize: fontsize
-
+                                opacity: 1
                                 text: "    "
                             }
                         }

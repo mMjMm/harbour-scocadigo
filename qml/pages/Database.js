@@ -105,8 +105,8 @@ function getNameAdded() {
     var timeplayed
     var averagepar
 
-  //  var bogeys=234;
-  //  var total=2345;
+    //  var bogeys=234;
+    //  var total=2345;
 
     var db = getDatabase();
     var res = "";
@@ -416,6 +416,9 @@ function getBaskets() {
         }
     })
 }
+
+
+
 ////////////////getCourses
 // sort by date
 //USED in Courses.qml and NewGameCourses.qml
@@ -731,6 +734,23 @@ function deleteCourse(courseLoeschen) {
 }
 
 
+function deleteGame(res_id) {
+    var db = getDatabase();
+    db.transaction(
+                function(tx) {
+
+                    tx.executeSql("DELETE FROM resultBasic WHERE RES_ID = ? ", res_id);
+                    tx.executeSql("DELETE FROM resultDetail WHERE RES_ID = ? ", res_id);
+                    tx.executeSql("DELETE FROM endResult WHERE RES_ID = ? ", res_id);
+
+
+                }
+                )
+}
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 ///////////////STATISTICS//////////////////////////////////////////////////
@@ -833,6 +853,7 @@ function getAverageBasketPlayer(name,coursename, basketnummer) {
                         sum=sum/rss.rows.length;
                         average=sum.toFixed(2);
                     }
+
                     else {
                         average="--";
                     }
@@ -1005,111 +1026,111 @@ function parorboogey(nickname){
                         basket_id = rss.rows.item(i).BASKED_ID
                         basketpar=getPar(basket_id, course_id)
 
-                          if (basketpar===3)
-                            {
-                              switch(basketpar-playerpar){
-                                case 0:
-                                  parreturn+=1
-                                  break;
-                                case 1:
-                                  birdiereturn+=1
-                                  break;
-                                case 2:
-                                  acereturn+=1
-                                  break;
-                                case -1:
-                                    boogiereturn+=1
-                                    break;
+                        if (basketpar===3)
+                        {
+                            switch(basketpar-playerpar){
+                            case 0:
+                                parreturn+=1
+                                break;
+                            case 1:
+                                birdiereturn+=1
+                                break;
+                            case 2:
+                                acereturn+=1
+                                break;
+                            case -1:
+                                boogiereturn+=1
+                                break;
 
                             }
 
-
-                          }
-
-                          if (basketpar===4)
-                            {
-                              switch(basketpar-playerpar){
-                                case 0:
-                                  parreturn+=1
-                                  break;
-                                case 1:
-                                  birdiereturn+=1
-                                  break;
-                                case 2:
-                                  eaglereturn+=1
-                                  break;
-                                case 3:
-                                  acereturn+=1
-                                  break;
-                                case -1:
-                                    boogiereturn+=1
-                                    break;
-
-                            }
-
-                          }
-                          if (basketpar===5)
-                            {
-                              switch(basketpar-playerpar){
-                                case 0:
-                                  parreturn+=1
-                                  break;
-                                case 1:
-                                  birdiereturn+=1
-                                  break;
-                                case 2:
-                                  eaglereturn+=1
-                                  break;
-                                case 3:
-                                  albatrossreturn+=1
-                                  break;
-                                case 4:
-                                    acereturn+=1
-                                    break;
-                                case -1:
-                                    boogiereturn+=1
-                                    break;
-
-                            }
-
-                          }
-
-
-
-                          if (basketpar===6)
-                            {
-                              switch(basketpar-playerpar){
-                                case 0:
-                                  parreturn+=1
-                                  break;
-                                case 1:
-                                  birdiereturn+=1
-                                  break;
-                                case 2:
-                                  eaglereturn+=1
-                                  break;
-                                case 3:
-                                  albatrossreturn+=1
-                                  break;
-                                case 5:
-                                    acereturn+=1
-                                    break;
-                                case -1:
-                                    boogiereturn+=1
-                                    break;
-
-                            }
-
-                          }
 
                         }
 
+                        if (basketpar===4)
+                        {
+                            switch(basketpar-playerpar){
+                            case 0:
+                                parreturn+=1
+                                break;
+                            case 1:
+                                birdiereturn+=1
+                                break;
+                            case 2:
+                                eaglereturn+=1
+                                break;
+                            case 3:
+                                acereturn+=1
+                                break;
+                            case -1:
+                                boogiereturn+=1
+                                break;
+
+                            }
+
+                        }
+                        if (basketpar===5)
+                        {
+                            switch(basketpar-playerpar){
+                            case 0:
+                                parreturn+=1
+                                break;
+                            case 1:
+                                birdiereturn+=1
+                                break;
+                            case 2:
+                                eaglereturn+=1
+                                break;
+                            case 3:
+                                albatrossreturn+=1
+                                break;
+                            case 4:
+                                acereturn+=1
+                                break;
+                            case -1:
+                                boogiereturn+=1
+                                break;
+
+                            }
+
+                        }
+
+
+
+                        if (basketpar===6)
+                        {
+                            switch(basketpar-playerpar){
+                            case 0:
+                                parreturn+=1
+                                break;
+                            case 1:
+                                birdiereturn+=1
+                                break;
+                            case 2:
+                                eaglereturn+=1
+                                break;
+                            case 3:
+                                albatrossreturn+=1
+                                break;
+                            case 5:
+                                acereturn+=1
+                                break;
+                            case -1:
+                                boogiereturn+=1
+                                break;
+
+                            }
+
+                        }
+
+                    }
+
                     var all = tx.executeSql("SELECT PLAYERPAR FROM resultDetail WHERE Id=? ;",[spielerId]);
                     totalreturn= all.rows.length
-                  }
+                }
                 )
-                restreturn= totalreturn-(acereturn+eaglereturn+birdiereturn+parreturn+boogiereturn)
-        return [acereturn,eaglereturn,birdiereturn,parreturn,boogiereturn,restreturn,totalreturn];
+    restreturn= totalreturn-(acereturn+eaglereturn+birdiereturn+parreturn+boogiereturn)
+    return [acereturn,eaglereturn,birdiereturn,parreturn,boogiereturn,restreturn,totalreturn];
 }
 
 ///////////////////////////////////////SCORECARDS
@@ -1147,24 +1168,20 @@ function getGamesbyDate() {
             coursepar=getCourseParbyID(course_id);
             bestscore=getBestScoreCourse(coursename);
             playerName=getPlayersbyRESID(res_id);
-//            console.log(" DATE:" + date + " COURSENAME:" + coursename +" ("+coursepar+")" + " TIME_PLAYED:" + time_played +"best course: " + bestscore + " playername: " + playerName )
+            //            console.log(" DATE:" + date + " COURSENAME:" + coursename +" ("+coursepar+")" + " TIME_PLAYED:" + time_played +"best course: " + bestscore + " playername: " + playerName )
             playerName=playerName.toString();
-           //playerName = playerName.replace(/(\w+\W+\w+)\W+/ig,"$1\n");
+            //playerName = playerName.replace(/(\w+\W+\w+)\W+/ig,"$1\n");
 
-
-
-
-
-           playerName = playerName.replace(/,/g," ");
+            playerName = playerName.replace(/,/g," ");
 
             score.append({
-                              "datum": date,
-                              "coursename": coursename,
-                              "coursepar": coursepar,
-                              "timeplayed": time_played,
-                              "bestscore": bestscore,
-                              "players":playerName,
-
+                             "datum": date,
+                             "coursename": coursename,
+                             "coursepar": coursepar,
+                             "timeplayed": time_played,
+                             "bestscore": bestscore,
+                             "players":playerName,
+                             "res_id":res_id,
                          });
 
         }
@@ -1221,10 +1238,15 @@ function getPlayersbyRESID(res_id){
             playerID[i] = rss.rows.item(i).Id
             playerName[i]=getSpielerNamebyID(playerID[i]) + "("+getPlayersEndPar(res_id, playerID[i]) +") ";
 
+            players.append({
+                               players:getSpielerNamebyID(playerID[i])
+                           })
 
-            //console.log("players playedPAR:" +getPlayersEndPar(res_id, playerID[i])  )
+            playerstotalpar.append({
+                               playerstotalpar:getPlayersEndPar(res_id, playerID[i])
+                           })                                             
         }
-        })
+    })
 
     return playerName;
 
@@ -1247,6 +1269,11 @@ function getSpielerNamebyID(playerID) {
 }
 
 
+
+
+
+
+
 function getPlayersEndPar(res_id, playerID)  {
     var id
     var playerstotalpar
@@ -1256,12 +1283,80 @@ function getPlayersEndPar(res_id, playerID)  {
     db.transaction(function(tx) {
 
         var rs = tx.executeSql("SELECT PLAYERTOTALPAR FROM endResult WHERE RES_ID =? AND Id =? ; ",[res_id, playerID]);
-               for (var i = 0; i < rs.rows.length; i++) {
+        for (var i = 0; i < rs.rows.length; i++) {
             //DEBUG
             playerstotalpar = rs.rows.item(i).PLAYERTOTALPAR
         }
     })
     return playerstotalpar;
+
+}
+
+
+///create scorecards
+
+function getamountBaskets(coursename) {
+    var db = getDatabase();
+    var res = "";
+    var baskets
+    db.transaction(function(tx) {
+        var rss = tx.executeSql("SELECT BASKETS FROM courses WHERE COURSENAME = '" + coursename + "' ");
+        for (var i = 0; i < rss.rows.length; i++) {
+            baskets = rss.rows.item(i).BASKETS
+        }
+        res = baskets;
+    })
+    return res;
+
+}
+
+//select  PLAYERPAR from resultDetail  NEED Id from playersname
+
+function getIdbyplayersName(name) {
+    var db = getDatabase();
+    var res = "";
+    var Id
+    db.transaction(function(tx) {
+        var rss = tx.executeSql("SELECT Id FROM spieler WHERE NAME = '" + name + "' ");
+        for (var i = 0; i < rss.rows.length; i++) {
+            Id = rss.rows.item(i).Id
+        }
+       res = Id;
+    })
+    return res;
+
+}
+
+function getPlayerParBasket(res_id,Id,courseID ) {
+    var db = getDatabase();
+    var res = "";
+
+    db.transaction(function(tx) {
+        var rss = tx.executeSql("SELECT PLAYERPAR FROM resultDetail WHERE RES_ID =? AND Id =? ; ",[res_id, Id]);
+        for (var i = 0; i < rss.rows.length; i++) {
+            res = rss.rows.item(i).PLAYERPAR
+            res=res-(getPar((i+1), courseID))
+
+                 result.append({
+                                  result:res
+                                  })        }
+    })
+    return res;
+}
+
+function getSpielerIDbyResId(res_id,coursename) {
+    var db = getDatabase();
+    var res = "";
+   var playerID = []
+    db.transaction(function(tx) {
+        var rss = tx.executeSql("SELECT DISTINCT Id FROM endResult WHERE RES_ID = '" + res_id + "' ");
+        for (var i = 0; i < rss.rows.length; i++) {
+            playerID[i] = rss.rows.item(i).Id
+             getPlayerParBasket(res_id,playerID[i],getCourseID(coursename) )
+
+        }
+    })
+    return res;
 
 }
 

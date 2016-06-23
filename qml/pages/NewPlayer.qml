@@ -5,6 +5,8 @@ import "Database.js" as DB
 Dialog {
 
     id: dialogplayer
+    property var transparency
+
     //acceptDestination:mainPage
     acceptDestination: Qt.resolvedUrl("FirstPage.qml")
     acceptDestinationAction: PageStackAction.Replace
@@ -21,16 +23,22 @@ Dialog {
         VerticalScrollDecorator {
         }
 
-        Rectangle {
+        Item{
             id: root //it's a good idea to name it always root so I'm able to remember it everytime ;)
             width: parent.width
             height: parent.height * 2
-            color: "#394264"
+
+            Rectangle {
+                anchors.fill: parent
+                opacity: settings.setting("transparency");
+                color: "#394264"
+            }
+
             Column {
                 id: column
                 width: root.width
                 DialogHeader {
-                    acceptText: "SAVE"
+                    acceptText: qsTr("SAVE")
                 }
                 Column {
                     id: colummm
@@ -43,8 +51,9 @@ Dialog {
                         width: parent.width
                         inputMethodHints: Qt.ImhNoPredictiveText
                         color: "white"
-                        placeholderText: "Nick"
-                        label: "Nick"
+                        placeholderText: qsTr("Nick")
+                        opacity: 1
+                        label: qsTr("Nick")
                         focus: true
                         maximumLength: 8
                         EnterKey.enabled: text.length > 0
@@ -58,10 +67,9 @@ Dialog {
                                 width: parent.width-(Theme.paddingLarge*1.5)
                                 height: parent.height
                                 anchors.horizontalCenter: parent.horizontalCenter
-
+                                opacity: settings.setting("transparency");
                                 color: "#3c7ea7"
                                 smooth: true
-
                             }
                         }
                     }
@@ -72,8 +80,9 @@ Dialog {
                         font.family: bebasNeue.name
                         width: parent.width
                         inputMethodHints: Qt.ImhNoPredictiveText
-                        placeholderText: "First name"
-                        label: "First name"
+                        placeholderText: qsTr("First name")
+                        label:qsTr( "First name")
+                        opacity: 1
                         maximumLength: 23
                         EnterKey.onClicked: {
                             lastName.focus = true
@@ -84,10 +93,9 @@ Dialog {
                                 width: parent.width-(Theme.paddingLarge*1.5)
                                 height: parent.height
                                 anchors.horizontalCenter: parent.horizontalCenter
-
+                                opacity: settings.setting("transparency");
                                 color: "#3c7ea7"
                                 smooth: true
-
                             }
                         }
                     }
@@ -97,8 +105,9 @@ Dialog {
                         font.family: bebasNeue.name
                         width: parent.width
                         inputMethodHints: Qt.ImhNoPredictiveText
-                        placeholderText: "Last name"
-                        label: "Last name"
+                        placeholderText: qsTr("Last name")
+                        label: qsTr("Last name")
+                        opacity: 1
                         maximumLength: 23
                         EnterKey.onClicked: {
                             email.focus = true
@@ -109,13 +118,11 @@ Dialog {
                                 width: parent.width-(Theme.paddingLarge*1.5)
                                 height: parent.height
                                 anchors.horizontalCenter: parent.horizontalCenter
-
+                                opacity: settings.setting("transparency");
                                 color: "#3c7ea7"
                                 smooth: true
-
                             }
                         }
-
                     }
                     TextField {
                         id: email
@@ -123,8 +130,9 @@ Dialog {
                         font.family: bebasNeue.name
                         width: parent.width
                         inputMethodHints: Qt.ImhEmailCharactersOnly | Qt.ImhNoPredictiveText
-                        placeholderText: "Email"
-                        label: "Email"
+                        placeholderText: qsTr("Email")
+                        label: qsTr("Email")
+                        opacity: 1
                         EnterKey.onClicked: {
                             pdga.focus = true
                         }
@@ -134,10 +142,9 @@ Dialog {
                                 width: parent.width-(Theme.paddingLarge*1.5)
                                 height: parent.height
                                 anchors.horizontalCenter: parent.horizontalCenter
-
+                                opacity: settings.setting("transparency");
                                 color: "#3c7ea7"
                                 smooth: true
-
                             }
                         }
                     }
@@ -147,9 +154,9 @@ Dialog {
                         font.family: bebasNeue.name
                         width: parent.width
                         inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPredictiveText
-
-                        placeholderText: "PDGA Nr"
-                        label: "PDGA Nr"
+                        opacity: 1
+                        placeholderText: qsTr("PDGA Nr")
+                        label:qsTr( "PDGA Nr")
                         EnterKey.onClicked: {
                             notes.focus = true
                         }
@@ -159,7 +166,7 @@ Dialog {
                                 width: parent.width-(Theme.paddingLarge*1.5)
                                 height: parent.height
                                 anchors.horizontalCenter: parent.horizontalCenter
-
+                                opacity: settings.setting("transparency");
                                 color: "#3c7ea7"
                                 smooth: true
 
@@ -170,23 +177,22 @@ Dialog {
                         id: notes
                         font.family: bebasNeue.name
                         width: parent.width
-                        placeholderText: "Notes"
-                        label: "Notes"
+                        placeholderText: qsTr("Notes")
+                        label: qsTr("Notes")
+
                         background: Component {
                             Rectangle {
                                 id: customBackground
                                 width: parent.width-(Theme.paddingLarge*1.5)
                                 height: parent.height
                                 anchors.horizontalCenter: parent.horizontalCenter
-
+                                opacity: settings.setting("transparency");
                                 color: "#3c7ea7"
                                 smooth: true
 
                             }
                         }
-
                     }
-
                 }
             }
         }

@@ -5,6 +5,9 @@ import "Database.js" as DB
 Page {
 
     id: newgamePage
+    property var transparency
+    property bool tabsound
+
     property int paddinglarge12:Theme.paddingLarge*1.2
 
     FontLoader {
@@ -25,27 +28,41 @@ Page {
             pageStack.replace(Qt.resolvedUrl("FirstPage.qml"))
         })
     }
+    Component.onCompleted: {
 
-    SilicaFlickable {
+
+        if(settings.setting("tabsound")==="1")
+        {
+            soundswitch.checked=true
+        }
+
+        if(settings.setting("tabsound")==="0")
+        {
+            soundswitch.checked=false
+        }
+
+    }
+        SilicaFlickable {
 
         anchors.fill: parent
         VerticalScrollDecorator {
         }
         PullDownMenu {
 
+
             MenuItem {
-                text: qsTr("about")
+                text: qsTr("DELETE EVERYTHING")
+                onClicked: {
+                    reset();
+                }
+            }
+            MenuItem {
+                text: qsTr("ABOUT")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("About.qml"))
                 }
             }
 
-            MenuItem {
-                text: qsTr("delete all")
-                onClicked: {
-                  reset();
-                }
-            }
         }
 
         Rectangle {
@@ -54,7 +71,7 @@ Page {
             width: parent.width
             height: parent.height
             color: "#394264"
-            opacity: 1
+            opacity: settings.setting("transparency");
             radius: 3
         }
 
@@ -63,11 +80,18 @@ Page {
             width: root.width
             spacing: 3
 
-            Rectangle {
+            Item{
                 id: topAbout
                 width: root.width
                 height: pageheader.height
-                color: "#50597b"
+
+                Rectangle {
+                    id:topAboutrect
+                    anchors.fill: parent
+                    color: "#50597b"
+                    opacity:settings.setting("transparency");
+                }
+
                 Image {
                     id:newgameicon
                     x: Theme.paddingLarge*2
@@ -76,55 +100,62 @@ Page {
                     fillMode: Image.PreserveAspectFit
                     source: "about.png"
                 }
+
                 Label {
                     id: pageheader
                     font.family: bebasNeue.name
                     anchors{top:topAbout.top;topMargin:Theme.paddingMedium;left:newgameicon.right;leftMargin:Theme.paddingMedium}
                     text: qsTr("settings")
+                    opacity: 1
                     font.pixelSize: Theme.fontSizeExtraLarge+Theme.fontSizeMedium
                     color: "white"
                     font.bold: true
                 }
-  }
-                Rectangle {
-                    id: scocadigo
-                    width: label.width+ Theme.paddingLarge*2
-                    height: label.height
-                    color: "#50597b"
-                    Label {
-                        id: label
-                        x: Theme.paddingLarge
-                        font.family: bebasNeue.name
-                        anchors{top:scocadigo.top;topMargin: Theme.paddingSmall}
-                        color: "white"
-                        font.pixelSize: Theme.fontSizeExtraLarge
-                        text: qsTr("ver.0.1 apha")
-                    }
+            }
+        }
+
+        Label {
+            id: label
+            x: Theme.paddingLarge
+            font.family: bebasNeue.name
+            anchors.top: column.bottom
+            anchors.topMargin: Theme.paddingLarge
+            anchors.right:root.right
+            anchors.rightMargin: Theme.paddingLarge
+            opacity:1
+            color: "white"
+            font.pixelSize: Theme.fontSizeExtraLarge
+            text: qsTr("look & feel")
+        }
+
+        Slider {
+            id:transparencyslider
+            anchors.top: label.bottom
+            anchors.topMargin: Theme.paddingLarge
+            width: parent.width
+            minimumValue: 0.1
+            maximumValue: 1
+            label:qsTr("TRANSPARENCY")
+            value:settings.setting("transparency")
+            valueText: value.toFixed(1)
+            onValueChanged:{
+                settings.setSetting("transparency", (transparencyslider.value).toFixed(1));
+                root.opacity=transparencyslider.value
+                topAboutrect.opacity=transparencyslider.value
+            }
+        }
+        TextSwitch {
+            id:soundswitch
+            anchors.top:transparencyslider.bottom
+            anchors.topMargin: Theme.paddingLarge
+            automaticCheck:true
+            checked:tabsound
+            text: qsTr("SOUND FEEDBACK")
+            description: qsTr("ENABLE/DISABLE ACOUSTIC FEEDBACK WHEN PRESSING [-][+] BUTTONS")
+            onCheckedChanged: {
+                (checked ? settings.setSetting("tabsound", 1) : settings.setSetting("tabsound", 0))
+
             }
         }
     }
-
-    //displayed when no players in database
-    Label {
-        id: nogames
-        font.family: bebasNeue.name
-        text: "No settings to set"
-        color: "white"
-        x: Theme.paddingLarge
-        anchors.horizontalCenter: newgamePage.horizontalCenter
-        anchors.verticalCenter: newgamePage.verticalCenter
-        font.pixelSize: Theme.fontSizeLarge + 35
-
-        Label {
-            font.family: bebasNeue.name
-            text: "because this is an alpha version of scocadigo!"
-            color: "white"
-            x: Theme.paddingLarge
-            font.pixelSize: Theme.fontSizeSmall
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.bottom
-        }
-    }
-
-
 }

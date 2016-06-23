@@ -14,7 +14,9 @@ TARGET = harbour-scocadigo
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-scocadigo.cpp
+SOURCES += \
+    src/harbour-scocadigo.cpp \
+    src/settings.cpp
 
 OTHER_FILES += qml/harbour-scocadigo.qml \
     qml/cover/CoverPage.qml \
@@ -35,7 +37,6 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-scocadigo-de.ts
-
 DISTFILES += \
     qml/pages/Buttons.qml \
     qml/pages/Database.js \
@@ -68,5 +69,10 @@ DISTFILES += \
     qml/pages/Round.qml \
     qml/pages/Settings.qml \
     qml/pages/Statistics.qml \
-    rpm/harbour-scocadigo.changes
+    rpm/harbour-scocadigo.changes \
+    qml/pages/CreatedScorecard.qml \
+    translations/harbour-scocadigo-de.ts
+
+HEADERS += \
+    src/settings.h
 

@@ -8,6 +8,8 @@ Dialog {
     property string coursename
     property int baskets
 
+    property var transparency: 0.2;
+
     FontLoader {
         id: bebasNeue
         source: "bebasNeue Regular.otf"
@@ -25,18 +27,22 @@ Dialog {
         VerticalScrollDecorator {
         }
 
-        Rectangle {
+        Item{
             id: root //it's a good idea to name it always root so I'm able to remember it everytime ;)
             width: parent.width
-            height: newCoursePage.height 
-            color: "#394264"
+            height: newCoursePage.height
 
+        Rectangle {
+            anchors.fill: parent
+            opacity: transparency
+            color: "#394264"
+    }
             Column {
                 id: column
                 width: root.width
                 DialogHeader {
                     id: dialogHeader
-                    acceptText: "SAVE"
+                    acceptText: qsTr("SAVE")
                 }
 
                 Column {
@@ -48,10 +54,11 @@ Dialog {
                         id: coursenamelabel
                         color: "white"
                         x: Theme.paddingLarge
-                        text: qsTr("Course name:")
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeMedium
                         width: colummm.width
+                        opacity: 1
+                        text: qsTr("Course name:")
                     }
 
                     TextField {
@@ -59,7 +66,7 @@ Dialog {
                         font.family: bebasNeue.name
                         width: parent.width
                         color: "white"
-                        maximumLength: 12
+                        maximumLength: 20// 12
                         placeholderText: "Course name"
                         inputMethodHints: Qt.ImhNoPredictiveText
 
@@ -83,28 +90,24 @@ Dialog {
                         EnterKey.onClicked: {
                             howmandybaskets.focus = true
                         }
-
-
-
                         background: Component {
                             Rectangle {
                                 id: customBackground
                                 width: parent.width-(Theme.paddingLarge*1.5)
                                 height: parent.height
                                 anchors.horizontalCenter: parent.horizontalCenter
-
+                                opacity: transparency
                                 color: "#d15a67"
                                 smooth: true
-
                             }
                         }
                     }
                     Label {
-
                         color: "white"
                         font.family: bebasNeue.name
                         x: Theme.paddingLarge
                         text: qsTr("Number of baskets:")
+                        opacity:1
                         font.pixelSize: Theme.fontSizeMedium
                         width: colummm.width
                     }
@@ -119,7 +122,7 @@ Dialog {
                         font.family: bebasNeue.name
                         color: "white"
                         width: parent.width
-                        placeholderText: "Baskets"
+                        placeholderText: qsTr("Baskets")
 
                         onTextChanged: {
 
@@ -137,15 +140,16 @@ Dialog {
                                 width: parent.width-(Theme.paddingLarge*1.5)
                                 height: parent.height
                                 anchors.horizontalCenter: parent.horizontalCenter
+                                opacity: transparency
                                 color: "#d15a67"
                                 smooth: true
-
                             }
                         }
                     }
                 }
             }
-        }}
+        }
+    }
 
 
     Banner {

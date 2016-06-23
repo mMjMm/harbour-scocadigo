@@ -27,18 +27,47 @@ import Sailfish.Silica 1.0
 import "Database.js" as DB
 
 Page {
+
+
     id: mainPage
+
     property int fontsizeHeader:screen.width/5
+    property var transparency
+    property var tabsound
+
     backNavigation: false
     FontLoader {
         id: bebasNeue
         source: "bebasNeue Regular.otf"
     }
-        Component.onCompleted: {
 
-       //activate cover for start a new game!
-        /*
-        DB.initialize();
+    Component.onCompleted: {
+
+        transparency=settings.setting("transparency");
+
+        if(typeof transparency=="undefined")
+        {
+            console.log("WELCOME TO °SCOCADIGO°")
+            settings.setSetting("transparency",1)
+            transparency=settings.setting("transparency");
+
+        }
+
+        tabsound=settings.setting("tabsound");
+
+        if(typeof tabsound=="undefined")
+        {
+            settings.setSetting("tabsound", 1)
+            tabsound=settings.setting("tabsound");
+
+        }
+
+
+        transparency=settings.setting("transparency");
+        root.opacity=transparency
+        scocadigorectangle.opacity=transparency
+        toplabelrec.opacity=transparency
+       /* DB.initialize();
         DB.getBaseResult();
         DB.getDetailResult();
         console.log("spieler:");
@@ -55,24 +84,38 @@ Page {
         DB.showEndResult();
 */
     }
-        onStatusChanged: {
-            mainWindow.cover =Qt.resolvedUrl("../cover/CoverPage.qml")
-        }
+
+    onStatusChanged: {
+
+        //activate cover for start a new game!
+        mainWindow.cover =Qt.resolvedUrl("../cover/CoverPage.qml")
+        transparency=settings.setting("transparency");
+        root.opacity=transparency
+        scocadigorectangle.opacity=transparency
+        toplabelrec.opacity=transparency
+    }
     Rectangle {
         id: root
         width: parent.width
         height: parent.height
         color: "#394264"
+        opacity:settings.setting("transparency")
     }
+
     Column {
         id: column
         width: root.width
         spacing: 3
-        Rectangle {
+        Item{
             id: scocadigorect
             width: root.width
             height: pageheader.height
-            color: "#50597b"
+            Rectangle {
+                id:scocadigorectangle
+                anchors.fill: parent
+                color: "#50597b"
+                opacity: settings.setting("transparency")
+            }
             Text {
                 id: pageheader
                 anchors { horizontalCenter: scocadigorect.horizontalCenter; top:scocadigorect.top;topMargin:Theme.paddingMedium}
@@ -80,26 +123,36 @@ Page {
                 color: "white"
                 font.pixelSize:fontsizeHeader
                 font.bold: true
+                opacity: 1
                 text: "°scocadigo°"
             }
         }
-        Rectangle {
+        Item{
             id:toplabel
             width: label.width+ Theme.paddingLarge*2
             height: label.height
             anchors.topMargin: Theme.paddingSmall
-            color: "#50597b"
+
+            Rectangle {
+                id:toplabelrec
+                anchors.fill: parent
+                color: "#50597b"
+                opacity:settings.setting("transparency")
+            }
             Label {
                 id: label
                 x: Theme.paddingLarge
                 font.family: bebasNeue.name
                 anchors {top:toplabel.top;topMargin:Theme.paddingSmall}
                 color: "white"
+                opacity:1
                 font.pixelSize: Theme.fontSizeExtraLarge
-                text: "score card disc golf"
+                text: qsTr("score card disc golf")
             }
         }
+
     }
+
     Buttons {
         id: buttons
     }

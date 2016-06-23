@@ -9,6 +9,7 @@ Item {
     property var screenwidth10:screen.width/10
     width:screen.width
     height:screen.height
+
     Grid{
         columns: 2
         spacing: themePadding1_5
@@ -22,9 +23,12 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+
+
                     pageStack.push(("NewGame.qml"), {
                                        dataContainer: root
                                    })
+
                     pageStack.pushAttached(("NewGameCourses.qml"))
                 }
             }
@@ -36,8 +40,11 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+
+
                     pageStack.push(("Players.qml"), {
                                    })
+
                 }
             }
         }
@@ -48,9 +55,12 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+
+
                     pageStack.push(("Courses.qml"), {
                                        dataContainer: root
                                    })
+
                 }
             }
         }
@@ -61,9 +71,12 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+
+
                     pageStack.push(Qt.resolvedUrl("Statistics.qml"), {
                                        dataContainer: root
                                    })
+
                 }
             }
         }
@@ -92,9 +105,12 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+
+
                     pageStack.push(Qt.resolvedUrl("Settings.qml"), {
                                        dataContainer: root
                                    })
+
                 }
             }
         }

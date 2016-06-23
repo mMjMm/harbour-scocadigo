@@ -4,6 +4,8 @@ import "Database.js" as DB
 Page {
     id: coursesPage
     property int padding_12:Theme.paddingLarge*1.2
+    property var transparency
+
     FontLoader {
         id: bebasNeue
         source: "bebasNeue Regular.otf"
@@ -20,12 +22,13 @@ Page {
         width: parent.width
         height: parent.height
         color: "#394264"
+        opacity: settings.setting("transparency");
     }
     SilicaFlickable {
         anchors.fill: parent
         PullDownMenu {
             MenuItem {
-                text: "add courses"
+                text: qsTr("ADD COURSES")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("NewCourses.qml"))
                 }
@@ -35,11 +38,16 @@ Page {
             id: column
             width: root.width
             spacing: 3
-            Rectangle {
+            Item {
                 id: topnewgame
                 width: root.width
                 height: pageheader.height
-                color: "#50597b"
+
+                Rectangle {
+                    anchors.fill:parent
+                    opacity: settings.setting("transparency");
+                    color: "#50597b"
+                }
                 Image {
                     id:newgameicon
                     x: Theme.paddingLarge*2
@@ -55,15 +63,22 @@ Page {
                     color: "white"
                     font.pixelSize: Theme.fontSizeExtraLarge+Theme.fontSizeMedium
                     font.bold: true
-
+                    opacity: 1
                     text: qsTr("new game")
                 }
             }
-            Rectangle {
+            Item{
                 id: selectplayers
                 width: label.width+ Theme.paddingLarge*2
                 height: label.height
-                color: "#50597b"
+
+
+                Rectangle {
+                    anchors.fill: parent
+                    opacity: settings.setting("transparency");
+                    color: "#50597b"
+                }
+
                 Label {
                     id: label
                     x: Theme.paddingLarge
@@ -71,13 +86,16 @@ Page {
                     anchors{top:selectplayers.top;topMargin: Theme.paddingSmall}
                     color: "white"
                     font.pixelSize: Theme.fontSizeExtraLarge
+                    opacity: 1
                     text: qsTr("select course")
                 }
             }
         }
+
         ListModel {
             id: courses
         }
+
         SilicaListView {
             id: listView
             VerticalScrollDecorator {
@@ -104,41 +122,67 @@ Page {
                                           baskets: baskets
                                       })
                 }
-                Rectangle {
+                Item{
                     id: namescourses
                     width: screen.width - 50
                     height: parent.height
-                    color: "#50597b"
-                }
 
-                ListView.onRemove: animateRemoval(delegate)
-                Label {
-                    id: nameLabel
-                    anchors{top: namescourses.top;topMargin: Theme.paddingMedium;left: namescourses.left;leftMargin: Theme.paddingMedium}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeExtraLarge
-                    text: coursename
-                }
-                Label {
-                    id: basketslabel
-                    anchors{left: namescourses.left;leftMargin: Theme.paddingMedium;top: nameLabel.bottom}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "Baskets:" + baskets
-                }
-                Label {
-                    id: info
-                    anchors{left: namescourses.left;leftMargin: Theme.paddingMedium;top: basketslabel.bottom;}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "PAR: " + totalpar
-                }
-                Label {
-                    id: infoLabel
-                    anchors{right: namescourses.right;rightMargin: Theme.paddingLarge;top: namescourses.top;topMargin: Theme.paddingMedium;}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "Top-score: " + DB.getBestScoreCourse(coursename)+ "\nAverage-score: "+ DB.getAverageCourse(coursename) + "\nPlayed: " + played
+                    Rectangle {
+                        anchors.fill: parent
+                        opacity: settings.setting("transparency");
+                        color: "#50597b"
+                    }
+
+                    ListView.onRemove: animateRemoval(delegate)
+                    Label {
+                        id: nameLabel
+                        anchors{top: namescourses.top;topMargin: Theme.paddingMedium;left: namescourses.left;leftMargin: Theme.paddingMedium}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraLarge
+                        font.bold: true
+                        opacity: 1
+                        text: coursename
+                    }
+                    Label {
+                        id: basketslabel
+                        anchors{left: namescourses.left;leftMargin: Theme.paddingMedium;top: nameLabel.bottom}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        opacity: 1
+                        text: qsTr("Baskets:") + baskets
+                    }
+                    Label {
+                        id: info
+                        anchors{left: namescourses.left;leftMargin: Theme.paddingMedium;top: basketslabel.bottom;}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        opacity: 1
+                        text: "PAR: " + totalpar
+                    }
+                    Label {
+                        id: infoLabel
+                        anchors.horizontalCenter: namescourses.horizontalCenter
+                        anchors.top: nameLabel.bottom
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        opacity: 1
+                        text: qsTr("Top-score: ") + DB.getBestScoreCourse(coursename)+ "\n"+qsTr("Average-score: ")+ DB.getAverageCourse(coursename)
+                    }
+
+                    Label {
+                        id: infoLabel2
+                        anchors.horizontalCenter: namescourses.horizontalCenter
+                        anchors.horizontalCenterOffset: namescourses.width/3
+                        anchors.top: nameLabel.bottom
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        opacity: 1
+                        text: qsTr("played: ") +played
+                    }
+
+
+
+
                 }
             }
         }
@@ -148,7 +192,7 @@ Page {
         id: nocourses
         visible: listView.count == 0
         font.family: bebasNeue.name
-        text: "No courses"
+        text: qsTr("No courses")
         color: "white"
         x: Theme.paddingLarge
         anchors{horizontalCenter: coursesPage.horizontalCenter;verticalCenter: coursesPage.verticalCenter}
@@ -156,8 +200,9 @@ Page {
         Label {
             visible: listView.count == 0
             font.family: bebasNeue.name
-            text: "pull down to add a new course"
+            text: qsTr("pull down to add a new course")
             color: "white"
+            opacity: 1
             x: Theme.paddingLarge
             font.pixelSize: Theme.fontSizeMedium
             anchors{horizontalCenter: parent.horizontalCenter;top: parent.bottom}

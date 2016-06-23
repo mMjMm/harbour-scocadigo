@@ -1,6 +1,7 @@
 import QtQuick 2.1
 import Sailfish.Silica 1.0
 import "Database.js" as DB
+import QtMultimedia 5.0
 
 Page {
     id: round
@@ -25,6 +26,8 @@ Page {
     property int coverspacing:-20;
     property int coverfontsize: Theme.fontSizeLarge
 
+    property var transparency
+    property var tabsound
 
     FontLoader {
         id: bebasNeue
@@ -35,7 +38,7 @@ Page {
         source: "fontawesome-webfont.ttf"
     }
     function reset() {
-        remorse.execute("CANCEL round", function () {
+        remorse.execute(qsTr("CANCEL ROUND"), function () {
             pageStack.clear()
             pageStack.replace(Qt.resolvedUrl("FirstPage.qml"))
         })
@@ -45,10 +48,14 @@ Page {
         id: remorse
     }
 
-
     backNavigation: true
 
+
+
     Component.onCompleted: {
+
+        tabsound= settings.setting("tabsound")
+       // console.log("tabsound: " +tabsound )
 
         if (mainPage.globalindex < 1) {
             howmanyplayers = DB.getcountSelectet()
@@ -86,6 +93,9 @@ Page {
     }
 
     onStatusChanged: {
+
+
+
         if (status === PageStatus.Active) {
             if (mainPage.globalindex < pageStack.depth) {
                 //FIRST_OPEN
@@ -163,6 +173,19 @@ Page {
         mainWindow.cover = roundCover
     }
 
+    SoundEffect {
+           id: soundUp
+           source: "/usr/share/sounds/jolla-ambient/stereo/keyboard_letter.wav"
+           muted: false
+
+       }
+
+    SoundEffect {
+          id: soundDown
+          source: "/usr/share/sounds/jolla-ambient/stereo/keyboard_option.wav"
+          muted: false;
+  }
+
     Component {
         id: roundCover
         CoverBackground {
@@ -170,6 +193,7 @@ Page {
                 id: rootcover
                 width: parent.width
                 height: parent.height
+                opacity: settings.setting("transparency");
                 color: "#394264"
             }
 
@@ -180,12 +204,17 @@ Page {
                 anchors.rightMargin:  Theme.paddingMedium;
             }
 
-            Rectangle {
+            Item{
                 id: scocadigorect
                 width: rootcover.width
                 height: pageheader.height+Theme.paddingMedium
-                color:"#11a8ab"
 
+
+            Rectangle {
+                anchors.fill: parent
+                opacity: settings.setting("transparency");
+                color:"#11a8ab"
+  }
                 Text {
                     id: pageheader
                     anchors { left: scocadigorect.left; leftMargin: Theme.paddingMedium; top:scocadigorect.top;topMargin:Theme.paddingMedium}
@@ -193,17 +222,21 @@ Page {
                     color: "white"
                     font.pixelSize: Theme.fontSizeExtraLarge
                     font.bold: true
+                    opacity: 1
                     text: "Bakset " + basketnummer + "/" + baskets
                 }
             }
-
-            Rectangle {
+            Item {
                 id: parrect
                 width: par.width+Theme.paddingLarge+Theme.paddingLarge
                 anchors.top:scocadigorect.bottom
                 height: par.height+Theme.paddingSmall
-                color:"#11a8ab"
 
+            Rectangle {
+                anchors.fill: parent
+                opacity: settings.setting("transparency");
+                color:"#11a8ab"
+     }
                 Text {
                     id: par
                     anchors { left: parrect.left;leftMargin: Theme.paddingMedium; top:parrect.top;topMargin: Theme.paddingSmall;}
@@ -211,6 +244,7 @@ Page {
                     color: "white"
                     font.pixelSize: Theme.fontSizeMedium
                     font.bold: true
+                    opacity: 1
                     text: "Par: " + basketpar
                 }
             }
@@ -235,12 +269,9 @@ Page {
                         font.pixelSize: coverfontsize
                         font.bold: true
                         text:  nickname
-
                     }
-
                 }
             }
-
 
             ListView{
                 id:coverlists
@@ -252,9 +283,7 @@ Page {
                 width: roundCover.width/3.2
                 height:rootcover.height-scocadigorect.height;
                 spacing:coverspacing;
-
                 delegate: ListItem {
-
                     Text {
                         id: playerpar
                         font.family: bebasNeue.name
@@ -275,13 +304,13 @@ Page {
         width: parent.width
         height: parent.height
         color: "#394264"
-        //  color:"#11a8ab"
+        opacity: settings.setting("transparency");
     }
     SilicaFlickable {
         anchors.fill: round
         PullDownMenu {
             MenuItem {
-                text: qsTr("CANCEL Round")
+                text: qsTr("CANCEL ROUND")
                 onClicked: {
                     mainPage.globalindex = 0
                     reset();
@@ -294,11 +323,16 @@ Page {
             id: column
             width: root.width
             spacing: 3
-            Rectangle {
+
+            Item{
                 id: topnewgame
                 width: root.width
                 height: pageheader.height
-                color: "#50597b"
+                Rectangle {
+                    anchors.fill: parent
+                    opacity: settings.setting("transparency");
+                    color: "#50597b"
+                }
                 Image {
                     id:newgameicon
                     x: Theme.paddingLarge*2
@@ -309,38 +343,48 @@ Page {
                 }
                 Label {
                     id: pageheader
+                    width: screen.width-(newgameicon.width*3.2)
                     font.family: bebasNeue.name
                     anchors{top:topnewgame.top;topMargin:Theme.paddingMedium;left:newgameicon.right;leftMargin:Theme.paddingMedium}
-                    text: coursename
-                    font.pixelSize: Theme.fontSizeExtraLarge+Theme.fontSizeMedium
+                    font.pixelSize: Theme.fontSizeExtraLarge+Theme.fontSizeSmall
                     color: "white"
+                    opacity: 1
                     font.bold: true
+                    truncationMode: TruncationMode.Fade
+                    text: coursename
                 }
-
                 Label {
                     font.family: bebasNeue.name
-                    anchors{baseline: pageheader.baseline;left: pageheader.right;leftMargin:Theme.paddingSmall}
+                    anchors{baseline: pageheader.baseline;right: topnewgame.right;rightMargin: Theme.paddingLarge+Theme.paddingSmall}
                     id: pageheaderpar
                     color: "white"
                     font.pixelSize: Theme.fontSizeSmall
+                    opacity: 1
                     text: " (" + totalpar + ")"
                 }
             }
-            Rectangle {
+            Item
+            {
                 id: infolabelpars
                 width: label.width+ Theme.paddingLarge*2
                 height: label.height
-                color: "#50597b"
 
+                Rectangle {
+                    anchors.fill: parent
+                    color: "#50597b"
+                    opacity: settings.setting("transparency");
+                }
                 Label {
                     id: label
                     x: Theme.paddingLarge
                     font.family: bebasNeue.name
                     anchors{top: infolabelpars.top;topMargin: Theme.paddingSmall}
                     color: "white"
-                    font.pixelSize: Theme.fontSizeExtraLarge
-                    text: "|Hole " + basketnummer + "/" + baskets
-                          + "|Par: " + basketpar + "|Av.: " + DB.getAverageBasket(coursename,basketnummer)+"|"
+                    opacity: 1
+
+                    font.pixelSize: Theme.fontSizeLarge
+                    text: qsTr("|BASKET ") + "<b>"+basketnummer+"</b>" + "/" + baskets
+                          + "|Par: " + basketpar + qsTr("|Av.: ") + DB.getAverageBasket(coursename,basketnummer)+"|"
                 }
             }
         }
@@ -369,123 +413,147 @@ Page {
                 contentHeight: nameLabel.height +worstLabel.height+avgLabel.height+bestLabel.height+Theme.paddingLarge
                 width: names.width
                 height: names.height
-                Rectangle {
+
+                Item{
                     id: names
                     width: screen.width - 50
                     height: parent.height
-                    color: "#50597b"
-                }
-                Text {
-                    id: up
-                    font.family: fontawesome.name
-                    color: "white"
-                    anchors{right: names.right;verticalCenter: names.verticalCenter}
-                    font.pixelSize: Theme.fontSizeExtraLarge + 30
-                    text: "\uf0fe "
-                    MouseArea {
-                        anchors.fill: up
-                        onClicked: {
-                            holepar.text = holepar.text - (-1)
-                            mainPage.totalplayerpar[index] = mainPage.totalplayerpar[index] + 1
-                            player.setProperty(index, "playerstotalpar",
-                                               mainPage.totalplayerpar[index])
-                            mainPage.playersbasketpar[basketnummerarray][index]
-                                    = (mainPage.playersbasketpar[basketnummerarray][index]) + 1
-                            animateTextup.start();
 
+
+                    Rectangle {
+                        anchors.fill: parent
+                        opacity: settings.setting("transparency");
+                        color: "#50597b"
+                    }
+                    Text {
+                        id: up
+                        font.family: fontawesome.name
+                        color: "white"
+                        anchors{right: names.right;verticalCenter: names.verticalCenter}
+                        font.pixelSize: Theme.fontSizeExtraLarge + 30
+                        opacity: 1
+                        text: "\uf0fe "
+                        MouseArea {
+                            anchors.fill: up
+                            onClicked: {
+                                  if(tabsound==="1")
+                                  {
+                                soundUp.play()
+                                  }
+                                holepar.text = holepar.text - (-1)
+                                mainPage.totalplayerpar[index] = mainPage.totalplayerpar[index] + 1
+                                player.setProperty(index, "playerstotalpar",
+                                                   mainPage.totalplayerpar[index])
+                                mainPage.playersbasketpar[basketnummerarray][index]
+                                        = (mainPage.playersbasketpar[basketnummerarray][index]) + 1
+                                animateTextup.start();
+
+                            }
+                        }
+                        NumberAnimation {
+                            id: animateTextup
+                            target: holepar
+                            properties: " font.pixelSize"
+                            from: Theme.fontSizeLarge+Theme.fontSizeMedium+ 40
+                            to: Theme.fontSizeExtraLarge + 40
+                            duration: 50
+                        }
+
+
+                    }
+
+                    Text {
+                        id: down
+                        font.family: fontawesome.name
+                        color: "white"
+                        anchors{right: up.left;verticalCenter: names.verticalCenter}
+                        font.pixelSize: Theme.fontSizeExtraLarge + 30
+                        opacity: 1
+                        text: "\uf146 "
+                        MouseArea {
+                            anchors.fill: down
+                            onClicked: {
+                                if(tabsound==="1")
+                                {
+
+                              soundDown.play()
+                                }
+                                holepar.text = holepar.text - 1
+                                mainPage.totalplayerpar[index] = mainPage.totalplayerpar[index] - 1
+                                player.setProperty(index, "playerstotalpar",
+                                                   mainPage.totalplayerpar[index])
+                                mainPage.playersbasketpar[basketnummerarray][index]
+                                        = mainPage.playersbasketpar[basketnummerarray][index] - 1
+                                animateTextdown.start();
+
+                            }
+                        }
+
+                        NumberAnimation {
+                            id: animateTextdown
+                            target: holepar
+                            properties: " font.pixelSize"
+                            from: Theme.fontSizeMedium
+                            to: Theme.fontSizeExtraLarge + 40
+                            duration: 50
                         }
                     }
-                    NumberAnimation {
-                        id: animateTextup
-                        target: holepar
-                        properties: " font.pixelSize"
-                        from: Theme.fontSizeLarge+Theme.fontSizeMedium+ 40
-                        to: Theme.fontSizeExtraLarge + 40
-                        duration: 50
+                    Text {
+                        id: holepar
+                        font.family: bebasNeue.name
+                        opacity: 1
+                        color: "white"
+                        anchors{horizontalCenter:names.horizontalCenter;verticalCenter:names.verticalCenter;verticalCenterOffset: Theme.paddingSmall}
+                        font.pixelSize: Theme.fontSizeExtraLarge + 40
+                        font.bold: true
+                        text: player.get(index).playersbasketpar
                     }
-
-
-                }
-
-                Text {
-                    id: down
-                    font.family: fontawesome.name
-                    color: "white"
-                    anchors{right: up.left;verticalCenter: names.verticalCenter}
-                    font.pixelSize: Theme.fontSizeExtraLarge + 30
-                    text: "\uf146 "
-                    MouseArea {
-                        anchors.fill: down
-                        onClicked: {
-                            holepar.text = holepar.text - 1
-                            mainPage.totalplayerpar[index] = mainPage.totalplayerpar[index] - 1
-                            player.setProperty(index, "playerstotalpar",
-                                               mainPage.totalplayerpar[index])
-                            mainPage.playersbasketpar[basketnummerarray][index]
-                                    = mainPage.playersbasketpar[basketnummerarray][index] - 1
-                            animateTextdown.start();
-
-                        }
+                    //NICKNAME
+                    Label {
+                        id: nameLabel
+                        anchors{top: names.top;topMargin: Theme.paddingMedium;left: names.left;leftMargin: Theme.paddingMedium}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraLarge
+                        font.bold: false
+                        opacity: 1
+                        text: nickname
                     }
-
-                    NumberAnimation {
-                        id: animateTextdown
-                        target: holepar
-                        properties: " font.pixelSize"
-                        from: Theme.fontSizeMedium
-                        to: Theme.fontSizeExtraLarge + 40
-                        duration: 50
+                    Label {
+                        id: currentplayerspar
+                        anchors{top: names.top;topMargin: Theme.paddingMedium;left: nameLabel.right;leftMargin: Theme.paddingMedium}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraLarge
+                        font.bold: true
+                        opacity: 1
+                        text: player.get(index).playerstotalpar
                     }
-                }
-                Text {
-                    id: holepar
-                    font.family: bebasNeue.name
-                    color: "white"
-                    anchors{horizontalCenter:names.horizontalCenter;verticalCenter:names.verticalCenter;verticalCenterOffset: Theme.paddingSmall}
-                    font.pixelSize: Theme.fontSizeExtraLarge + 40
-                    font.bold: true
-                    text: player.get(index).playersbasketpar
-                }
-                //NICKNAME
-                Label {
-                    id: nameLabel
-                    anchors{top: names.top;topMargin: Theme.paddingMedium;left: names.left;leftMargin: Theme.paddingMedium}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeExtraLarge
-                    font.bold: false
-                    text: nickname
-                }
-                Label {
-                    id: currentplayerspar
-                    anchors{top: names.top;topMargin: Theme.paddingMedium;left: nameLabel.right;leftMargin: Theme.paddingMedium}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeExtraLarge
-                    font.bold: true
-                    text: player.get(index).playerstotalpar
-                }
-                //Players best on hole
-                Label {
-                    id: bestLabel
-                    anchors{top: nameLabel.bottom;left: names.left;leftMargin: Theme.paddingMedium}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "Best: " + DB.getBestScoreBasket(index,coursename, basketnummer)
-                }
-                //Avaerage of whole of player
-                Label {
-                    id: avgLabel
-                    anchors{top: bestLabel.bottom;left: names.left;leftMargin: Theme.paddingMedium}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "Average: " + DB.getAverageBasketPlayer(nickname,coursename, basketnummer)
-                }
-                //Players worst on hole
-                Label {
-                    id: worstLabel
-                    anchors{top: avgLabel.bottom;left: names.left;leftMargin: Theme.paddingMedium}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: "Worst: " + DB.getWorstScoreBasket(index,coursename, basketnummer)
+                    //Players best on hole
+                    Label {
+                        id: bestLabel
+                        anchors{top: nameLabel.bottom;left: names.left;leftMargin: Theme.paddingMedium}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeSmall
+                        opacity: 1
+                        text: qsTr("Best: ") + DB.getBestScoreBasket(index,coursename, basketnummer)
+                    }
+                    //Avaerage of whole of player
+                    Label {
+                        id: avgLabel
+                        anchors{top: bestLabel.bottom;left: names.left;leftMargin: Theme.paddingMedium}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeSmall
+                        opacity: 1
+                        text: qsTr("Average: ") + DB.getAverageBasketPlayer(nickname,coursename, basketnummer)
+                    }
+                    //Players worst on hole
+                    Label {
+                        id: worstLabel
+                        anchors{top: avgLabel.bottom;left: names.left;leftMargin: Theme.paddingMedium}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeSmall
+                        opacity: 1
+                        text: qsTr("Worst: ") + DB.getWorstScoreBasket(index,coursename, basketnummer)
+                    }
                 }
             }
         }

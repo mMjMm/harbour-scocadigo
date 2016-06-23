@@ -6,6 +6,7 @@ Page {
     property bool selected
     property bool navigation: false
     property int paddinglarge12:Theme.paddingLarge*1.2
+    property var transparency
 
     FontLoader {
         id: bebasNeue
@@ -30,12 +31,13 @@ Page {
         width: parent.width
         height: parent.height
         color: "#394264"
+        opacity:settings.setting("transparency");
     }
     SilicaFlickable {
         anchors.fill: parent
         PullDownMenu {
             MenuItem {
-                text: qsTr("add player")
+                text: qsTr("ADD PLAYER")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("NewPlayer.qml"))
                 }
@@ -48,41 +50,58 @@ Page {
             id: column
             width: root.width
             spacing: 3
-            Rectangle {
+
+            Item{
                 id: topnewgame
                 width: root.width
                 height: pageheader.height
-                color: "#50597b"
+
+
+                Rectangle {
+                    anchors.fill:parent
+                    color: "#50597b"
+                    opacity:settings.setting("transparency");
+                }
+
                 Image {
                     id:newgameicon
                     x: Theme.paddingLarge*2
                     anchors.verticalCenter: topnewgame.verticalCenter
                     width: pageheader.height-paddinglarge12; height:pageheader.height-paddinglarge12
                     fillMode: Image.PreserveAspectFit
+                    opacity: 1;
                     source: "newgameIcon.png"
                 }
                 Label {
                     id: pageheader
                     anchors{top:topnewgame.top;topMargin:Theme.paddingMedium;left:newgameicon.right;leftMargin:Theme.paddingMedium}
                     font.family: bebasNeue.name
+                    opacity:1;
                     color: "white"
                     font.pixelSize: Theme.fontSizeExtraLarge+Theme.fontSizeMedium
                     text: qsTr("New game")
                     font.bold: true
-
                 }
             }
-            Rectangle {
+
+            Item {
                 id: selectplayers
                 width: label.width+ Theme.paddingLarge*2
                 height: label.height
-                color: "#50597b"
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "#50597b"
+                    opacity: settings.setting("transparency");
+                }
+
                 Label {
                     id: label
                     x: Theme.paddingLarge
                     font.family: bebasNeue.name
                     anchors{top:selectplayers.top;topMargin: Theme.paddingSmall}
                     color: "white"
+                    opacity:1;
                     font.pixelSize: Theme.fontSizeExtraLarge
                     text: qsTr("select players")
                 }
@@ -120,36 +139,47 @@ Page {
                     }
                     if (DB.playerselected() > 0) {
                         navigation = true
-                       } else
-                           navigation = false
+                    } else
+                        navigation = false
                 }
-                Rectangle {
+
+                Item{
                     id: names
                     width: screen.width - 50
                     height: parent.height
-                    color: "#50597b"
-                }
-                Label {
-                    id: nameLabel
-                    anchors{top: names.top;topMargin: Theme.paddingMedium;left: names.left;leftMargin: Theme.paddingMedium;}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeExtraLarge
-                    text: nickname
-                }
-                Label {
-                    id: fullNameLabel
-                    anchors{left: names.left;leftMargin: Theme.paddingMedium;top: nameLabel.bottom}
-                    font.family: bebasNeue.name
-                    font.pixelSize: Theme.fontSizeSmall
-                    text: firstname + " " + lastname.substring(0, 25)
-                }
-                Text {
-                    id: checkedIcon
-                    font.family: fontawesome.name
-                    anchors{verticalCenter: names.verticalCenter;right: names.right;rightMargin: Theme.paddingMedium}
-                    text: gewaehlt == 1 ? "\uf14a" : "\uf096"
-                    color: "white"
-                    font.pixelSize: Theme.fontSizeLarge+38
+                    Rectangle {
+                        anchors.fill: parent
+                        opacity:settings.setting("transparency");
+                        color: "#50597b"
+                    }
+                    Label {
+                        id: nameLabel
+                        anchors{top: names.top;topMargin: Theme.paddingMedium;left: names.left;leftMargin: Theme.paddingMedium;}
+                        font.family: bebasNeue.name
+                        font.pixelSize: Theme.fontSizeExtraLarge
+                        opacity: 1
+                        text: nickname
+                    }
+                    Label {
+                        id: fullNameLabel
+                        anchors{left: names.left;leftMargin: Theme.paddingMedium;top: nameLabel.bottom}
+                        font.family: bebasNeue.name
+                        width: (names.width-checkedIcon.width*2)
+                        font.pixelSize: Theme.fontSizeSmall
+                        opacity:1
+                        truncationMode: TruncationMode.Fade
+
+                        text: firstname + " " + lastname
+                    }
+                    Text {
+                        id: checkedIcon
+                        font.family: fontawesome.name
+                        anchors{verticalCenter: names.verticalCenter;right: names.right;rightMargin: Theme.paddingMedium}
+                        text: gewaehlt == 1 ? "\uf14a" : "\uf096"
+                        opacity:1
+                        color: "white"
+                        font.pixelSize: Theme.fontSizeLarge+38
+                    }
                 }
             }
         }
@@ -159,7 +189,7 @@ Page {
         id: noplayer
         visible: listView.count == 0
         font.family: bebasNeue.name
-        text: "No players"
+        text:qsTr("No players")
         color: "white"
         x: Theme.paddingLarge
         anchors{horizontalCenter: newgamePage.horizontalCenter;verticalCenter: newgamePage.verticalCenter}
@@ -167,7 +197,7 @@ Page {
         Label {
             visible: listView.count == 0
             font.family: bebasNeue.name
-            text: "pull down to add a new player"
+            text: qsTr("pull down to add a new player")
             color: "white"
             x: Theme.paddingLarge
             font.pixelSize: Theme.fontSizeMedium

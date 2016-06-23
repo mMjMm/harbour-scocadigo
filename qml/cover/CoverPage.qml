@@ -2,14 +2,19 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
+
+    property var transparency
+
     FontLoader {
         id: bebasNeue
         source: "../pages/bebasNeue Regular.otf"
     }
+
     Rectangle {
         id: root
         width: parent.width
         height: parent.height
+        opacity:settings.setting("transparency")
         color: "#394264"
     }
     Image {
@@ -19,11 +24,19 @@ CoverBackground {
         anchors.right:  root.right;
         anchors.rightMargin:Theme.paddingMedium;
     }
-    Rectangle {
+
+    Item{
         id: scocadigorect
         width: root.width
         height: pageheader.height+Theme.paddingMedium
+
+
+    Rectangle {
+        id:pageheaderrect
+        anchors.fill: parent
+        opacity:settings.setting("transparency")
         color:"#11a8ab"
+          }
         Text {
             id: pageheader
             anchors { horizontalCenter: scocadigorect.horizontalCenter; top:scocadigorect.top;topMargin:Theme.paddingMedium}
@@ -31,9 +44,11 @@ CoverBackground {
             color: "white"
             font.pixelSize: Theme.fontSizeExtraLarge+5
             font.bold: true
+            opacity: 1
             text: "°scocadigo°"
         }
     }
+
     Label {
         id: label3
         x: Theme.paddingLarge
@@ -44,6 +59,7 @@ CoverBackground {
         color: "white"
         font.pixelSize: Theme.fontSizeMedium
         font.bold: true
+        opacity: 1
         text: "start a new game"
     }
     CoverActionList {

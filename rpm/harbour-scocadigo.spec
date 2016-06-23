@@ -13,8 +13,8 @@ Name:       harbour-scocadigo
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    scocadigo keep track of your disc golf score
-Version:    0.1
-Release:    1
+Version:    0.2
+Release:    2
 Group:      Qt/Qt
 License:    MIT License
 URL:        http://example.org/

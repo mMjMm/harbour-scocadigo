@@ -4,23 +4,19 @@
 <context>
     <name>About</name>
     <message>
-        <source>by Michael Johannes Muik</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>about</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>scocadigo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>°scocadigo° ver. 0.1 ALPHA </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>SCOCADIGO is a scorecard app for Disc Golf. It is possible to add new players, courses and keep track of your Disc Golf rounds. Watch individual statistics and compare your scores with other players. Improve your game. Just play! Please be aware! you using an alpha version of scocadigo. There might be bugs! please report when you find one!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LICENSE: MIT </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28,6 +24,66 @@
     <name>Courses</name>
     <message>
         <source>courses</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CreatedScorecard</name>
+    <message>
+        <source>scorecard </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>player </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>total </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DefinePar</name>
+    <message>
+        <source>Hole: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditPlayers</name>
+    <message>
+        <source>SAVE CHANGES</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nick</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDGA Nr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FirstPage</name>
+    <message>
+        <source>score card disc golf</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -45,19 +101,35 @@
         <source>Number of baskets:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>SAVE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baskets</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewGame</name>
-    <message>
-        <source>add player</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>New game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>select players</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ADD PLAYER</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No players</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pull down to add a new player</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -71,41 +143,125 @@
         <source>select course</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>ADD COURSES</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baskets:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top-score: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average-score: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>played: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No courses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pull down to add a new course</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewPlayer</name>
+    <message>
+        <source>SAVE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nick</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDGA Nr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Players</name>
     <message>
-        <source>Delete all players</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add player</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Players</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Players_conflict-20160617-174213</name>
     <message>
-        <source>Delete all players</source>
+        <source>DELETE ALL PLAYERS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>add player</source>
+        <source>ADD PLAYER</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Players</source>
+        <source>Played rounds: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time played: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average par: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No players</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pull down to add a new player</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Round</name>
     <message>
-        <source>CANCEL Round</source>
+        <source>CANCEL ROUND</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>|BASKET </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>|Av.: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Best: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Worst: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -115,90 +271,78 @@
         <source>ENDRESULTS:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Endresult:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top- score: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average-score: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number-played: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Round_Scorecard</name>
     <message>
-        <source>CANCEL Round</source>
+        <source>CANCEL ROUND</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SAVE Round</source>
+        <source>SAVE ROUND</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Round_conflict-20160613-004319</name>
     <message>
-        <source>CANCEL Round</source>
+        <source>scorecard </source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Round_conflict-20160613-005626</name>
     <message>
-        <source>CANCEL Round</source>
+        <source>player </source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Round_conflict-20160616-114504</name>
     <message>
-        <source>CANCEL Round</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Round_conflict-20160616-152042</name>
-    <message>
-        <source>CANCEL Round</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Round_conflict-20160616-153418</name>
-    <message>
-        <source>CANCEL Round</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Round_conflict-20160617-192343</name>
-    <message>
-        <source>CANCEL Round</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Round_conflict-20160617-193152</name>
-    <message>
-        <source>CANCEL Round</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Round_conflict-20160617-235945</name>
-    <message>
-        <source>CANCEL Round</source>
+        <source>total </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Settings</name>
     <message>
-        <source>about</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>delete all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ver.0.1 apha</source>
+        <source>look &amp; feel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOUND FEEDBACK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ENABLE/DISABLE ACOUSTIC FEEDBACK WHEN PRESSING [-][+] BUTTONS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ABOUT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DELETE EVERYTHING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TRANSPARENCY</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

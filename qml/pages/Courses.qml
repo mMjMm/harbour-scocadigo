@@ -6,52 +6,42 @@ Page {
 
     id: coursesPage
     property int paddinglarge12:Theme.paddingLarge*1.2
-
-
+    property var transparency
 
     FontLoader {
         id: bebasNeue
         source: "bebasNeue Regular.otf"
     }
-
     FontLoader {
         id: fontawesome
         source: "fontawesome-webfont.ttf"
     }
-
     function reset() {
         remorse.execute("DELETE ALL COURSES", function () {
             DB.dropCourses()
             pageStack.replace(Qt.resolvedUrl("Courses.qml"))
         })
     }
-
     //reset counter animation?
     RemorsePopup {
         id: remorse
     }
-
     //Emitted after component "startup" has completed. This can be used to execute script code at startup, once the full QML environment has been established.
     Component.onCompleted: {
 
         DB.initialize()
         DB.getCourses()
-        //DB.getCoursesDEBUG();
     }
-
-
-
-
     Rectangle {
         id: root //it's a good idea to name it always root so I'm able to remember it everytime ;)
         width: parent.width
         height: parent.height
+        opacity: settings.setting("transparency");
         color: "#394264"
     }
 
     SilicaFlickable {
         anchors.fill: parent
-
         PullDownMenu {
             MenuItem {
                 text: "Delete all courses"
@@ -73,12 +63,16 @@ Page {
             width: root.width
             spacing: 3
 
-            Rectangle {
+            Item {
                 id: topcourses
                 width: root.width
                 height: pageheader.height
-                color: "#50597b"
 
+                Rectangle {
+                    anchors.fill: parent
+                    opacity: settings.setting("transparency");
+                    color: "#50597b"
+                }
                 Image {
                     id:newgameicon
                     x: Theme.paddingLarge*2
@@ -94,6 +88,7 @@ Page {
                     text: qsTr("courses")
                     font.pixelSize: Theme.fontSizeExtraLarge+Theme.fontSizeMedium
                     color: "white"
+                    opacity: 1
                     font.bold: true
                 }
             }
@@ -133,13 +128,14 @@ Page {
                     })
                 }
                 onClicked: {
-                    console.log("clicked")
+                    // console.log("clicked")
                 }
 
                 Rectangle {
                     id: namescourses
                     width: screen.width - 50
                     height: parent.height
+                    opacity: settings.setting("transparency");
                     color: "#d15a67"
                 }
 
@@ -152,6 +148,7 @@ Page {
                     anchors.leftMargin: Theme.paddingMedium
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeMedium
+                    opacity: 1
                     font.bold: true
                     text: coursename
                 }
@@ -162,6 +159,7 @@ Page {
                     anchors.top: nameLabel.bottom
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeExtraSmall
+                    opacity: 1
                     text: "Baskets:" + baskets
                 }
                 Label {
@@ -171,20 +169,33 @@ Page {
                     anchors.top: basketslabel.bottom
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeExtraSmall
+                    opacity: 1
                     text: "Par: " + totalpar
-                    // text: "PAR: " + totalparr +  "\nLenght: 0 m"
                 }
 
                 Label {
-                    id: infoLabel
-                    anchors.right: namescourses.right
-                    anchors.rightMargin: Theme.paddingLarge
-                    anchors.top: namescourses.top
-                    anchors.topMargin: Theme.paddingLarge
+                    id: infoLabe
+                    anchors.horizontalCenter: namescourses.horizontalCenter
+                    anchors.top: nameLabel.bottom
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeExtraSmall
-                    text: "Course Record: " + DB.getBestScoreCourse(coursename)+ "\nAverage-score: "+ DB.getAverageCourse(coursename) + "\nPlayed: " + played
+                    opacity: 1
+                    text: "Course Record: " + DB.getBestScoreCourse(coursename)+ "\nAverage-score: "+ DB.getAverageCourse(coursename)
                 }
+
+                Label {
+                    id: infoLabel2
+                    anchors.horizontalCenter: namescourses.horizontalCenter
+                    anchors.horizontalCenterOffset: namescourses.width/3
+                    anchors.top: nameLabel.bottom
+                    font.family: bebasNeue.name
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    opacity: 1
+                    text:"Played: " + played
+                }
+
+
+
 
                 function editcourse() {
                     pageStack.replace(Qt.resolvedUrl("EditCourses.qml"), {
@@ -210,11 +221,7 @@ Page {
                 }
             }
         }
-
-
     }
-
-
 
     //displayed when no courses in database
     Label {
@@ -226,7 +233,6 @@ Page {
         x: Theme.paddingLarge
         anchors.horizontalCenter: coursesPage.horizontalCenter
         anchors.verticalCenter: coursesPage.verticalCenter
-
         font.pixelSize: Theme.fontSizeLarge + 35
 
         Label {
@@ -240,5 +246,4 @@ Page {
             anchors.top: parent.bottom
         }
     }
-
 }
