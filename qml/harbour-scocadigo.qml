@@ -29,6 +29,8 @@ ApplicationWindow
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     property var transparency
     property var tabsound
+    property var scorecardname
+
 
     Component.onCompleted: {
 
@@ -49,7 +51,12 @@ ApplicationWindow
             settings.setSetting("tabsound", 1)
         }
 
+        scorecardname=settings.setting("scorecardname");
 
+        if(typeof scorecardname=="undefined")
+        {
+            settings.setSetting("scorecardname", 0)
+        }
     }
     FirstPage {
         id: mainPage

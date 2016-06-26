@@ -158,14 +158,12 @@ Page {
                                        coursename: coursename,
                                        coursepar: coursepar,
                                        datum: datum,
+                                       uhrzeit:uhrzeit,
                                        timeplayed:timeplayed,
                                        res_id:res_id,
                                    })
 
                     //                    console.log("debug getSpielerIdbyRESID: " + DB.getSpielerIDbyResId(res_id))
-
-
-
 
                 }
 
@@ -191,7 +189,7 @@ Page {
                     font.pixelSize: Theme.fontSizeMedium
                     font.bold: true
                     opacity: 1
-                    text: coursename + " " +  "("+ coursepar+")"
+                    text: coursename + " " + "("+ coursepar+")"
                 }
 
                 Label {
@@ -207,6 +205,10 @@ Page {
                     text: datum
                 }
 
+
+
+
+
                 Label {
                     id: time_played
                     anchors.right: names.right
@@ -215,7 +217,7 @@ Page {
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeExtraSmall
                     opacity: 1
-                    text:timeplayed
+                    text:uhrzeit+" "+timeplayed
                 }
 
                 Label {

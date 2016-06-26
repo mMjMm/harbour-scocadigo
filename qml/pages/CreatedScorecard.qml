@@ -13,6 +13,8 @@ Page {
     property int coursepar
     property string datum
     property string timeplayed
+    property string uhrzeit
+
     property var baskets
     property int res_id
 
@@ -26,6 +28,8 @@ Page {
     property int margincircle:Theme.paddingSmall;
 
     property var transparency
+    property var scorecardname
+    property var playernamelabel
 
     FontLoader {
         id: bebasNeue
@@ -40,6 +44,18 @@ Page {
         DB.getPlayersbyRESID(res_id)
         //filll resMODEL
         DB.getSpielerIDbyResId(res_id,coursename)
+
+
+        if(settings.setting("scorecardname")==="0")
+        {
+            playernamelabel=0
+        }
+        if(settings.setting("scorecardname")==="1")
+        {
+            playernamelabel=1
+        }
+
+
     }
 
     ListModel {
@@ -78,16 +94,15 @@ Page {
             }
             Image {
                 id: newgameicon
-                x: Theme.paddingLarge*2
+                x: Theme.paddingLarge*1.5
                 anchors.verticalCenter:topnewgame.verticalCenter
                 width: pageheader.height-Theme.paddingSmall; height:pageheader.height-Theme.paddingSmall
                 fillMode: Image.PreserveAspectFit
-                source: "newgameIcon.png"
+                source: "statisticsicon.png"
             }
             Label {
                 id: pageheader
                 width: root.width-(root.width/2.5)
-
                 anchors{top:topnewgame.top;topMargin: Theme.paddingLarge;bottomMargin:Theme.paddingLarge;left:newgameicon.right;leftMargin: Theme.paddingMedium}
                 font.family: bebasNeue.name
                 color: "white"
@@ -95,31 +110,36 @@ Page {
                 font.pixelSize:screen.width/9
                 opacity: 1
                 truncationMode: TruncationMode.Fade
-
-                text: qsTr("scorecard ") + coursename
-
+                text:coursename+" (" + coursepar + ")"
             }
-            Label {
-                id: pageheaderpar
-                font.family: bebasNeue.name
-                anchors{baseline: pageheader.baseline;left: pageheader.right;leftMargin:Theme.paddingSmall}
-                color: "white"
-                font.pixelSize: Theme.fontSizeSmall
-                font.bold: true
-                opacity: 1
-                text: " (" + coursepar + ")"
-            }
+
 
             Label {
                 id: timelabel
                 font.family: bebasNeue.name
-                anchors{baseline: pageheader.baseline;right: topnewgame.right; rightMargin: Theme.paddingLarge; }
+                anchors{top: pageheader.top; right: topnewgame.right; rightMargin: Theme.paddingLarge; }
                 color: "white"
                 font.pixelSize: Theme.fontSizeSmall
                 opacity: 1
                 font.bold: true
-                text:datum + " " + timeplayed
+                text:datum+ " " + uhrzeit
+
+
             }
+
+
+            Label {
+                id: timeplayedlabel
+                font.family: bebasNeue.name
+                anchors{bottom: pageheader.bottom;right: timelabel.right;}
+                color: "white"
+                font.pixelSize: Theme.fontSizeExtraSmall
+                opacity: 1
+                font.bold: true
+                text:"Time Played: " + timeplayed
+            }
+
+
         }
 
         Rectangle{
@@ -134,7 +154,7 @@ Page {
         Rectangle{
             id:playerrectback
             anchors{ top:topnewgame.bottom; topMargin: Theme.paddingLarge; leftMargin:Theme.paddingLarge}
-            width: playerlabel.width+marginrect+Theme.paddingMedium
+            width: playercolumn.width+marginrect
             height: playerlabel.height+marginrect
             color: "#3a8499"
             opacity: settings.setting("transparency");
@@ -149,7 +169,7 @@ Page {
             font.pixelSize: fontsize
             font.bold: true
             opacity: 1
-            text:qsTr("player ")
+            text:qsTr("player")
         }
 
         Rectangle{
@@ -172,13 +192,35 @@ Page {
             text:qsTr("total ")
         }
 
-
-
         /*players MODEL: players.append({
                                         players:nickNAme[q]
                                       })
 
         */
+
+        Column{
+            id:playercolumnBLIND
+            anchors{ top: totalrectback.bottom;topMargin:Theme.paddingMedium}
+            spacing:4
+            Repeater {
+                id: playersrepeaterBLIND
+                model: players
+                Item{
+                    id: playernamerectBLIND
+                   // width: playerlabel.width+marginrect+Theme.paddingMedium
+                    width: playercolumn.width+marginrect
+                    height: playerlabel.height+marginrect
+
+                    Rectangle {
+                        id:playersnamerectangleBLIND
+                        anchors.fill: parent
+                        opacity: settings.setting("transparency");
+                        color: "#3a8499"
+                    }
+                }
+            }
+        }
+
         Column{
             id:playercolumn
             anchors{ top: totalrectback.bottom;topMargin:Theme.paddingMedium}
@@ -189,19 +231,14 @@ Page {
 
                 Item{
                     id: playernamerect
-                    width: playerlabel.width+marginrect+Theme.paddingMedium
+                   // width: playerlabel.width+marginrect+Theme.paddingMedium
+                    width: playernames.width+marginrect
+
                     height: playerlabel.height+marginrect
 
 
-                    Rectangle {
-                        id:playersnamerectangle
-                        anchors.fill: parent
-                        opacity: settings.setting("transparency");
-                        color: "#3a8499"
-                    }
                     Label {
-                        id: pars
-
+                        id: playernames
                         anchors.centerIn:parent
                         anchors.verticalCenterOffset: 4
                         font.family: bebasNeue.name
@@ -210,7 +247,12 @@ Page {
                         opacity: 1
                         font.pixelSize: fontsize
                         truncationMode: TruncationMode.Fade
-                        text: modelData//.substring(0, 6)
+                        text: (playernamelabel ? lastname:nickname)
+
+                        //text: nickname//.substring(0, 6)
+                        //text: firstname//.substring(0, 6)
+                        //text: lastname//.substring(0, 6)
+                        //text:lastname+ " "+ firstname
                     }
                 }
             }
@@ -221,14 +263,13 @@ Page {
         */
         Column{
             id:playertotalparcolumn
-            anchors{ left:playercolumn.right; leftMargin: Theme.paddingSmall; top: totalrectback.bottom;topMargin:Theme.paddingMedium}
+            anchors{ left:playerrectback.right; leftMargin: Theme.paddingSmall; top: totalrectback.bottom;topMargin:Theme.paddingMedium}
             spacing:4
             Repeater {
                 id: playertotalparrepeater
                 model: playerstotalpar
 
                 Item{
-
                     id: playertotalparrect
                     width: ((playerlabel.width+marginrect)/2)-1.5
                     height: playerlabel.height+marginrect
@@ -264,8 +305,6 @@ Page {
                     id: playertotalparrect2
                     width: ((playerlabel.width+marginrect)/2)-1.5
                     height: playerlabel.height+marginrect
-
-
                     Rectangle {
                         anchors.fill: parent
                         opacity: settings.setting("transparency");
@@ -292,7 +331,7 @@ Page {
             height: root.height
             width: root.width
             //contentWidth: contetnwidht
-            contentWidth: basketrow.width*1.2;
+            contentWidth: basketrow.width*1.5;
             contentHeight:resultbackground.height
             flickableDirection: Flickable.HorizontalFlick
 
@@ -301,7 +340,6 @@ Page {
             }
             clip: true
             boundsBehavior: Flickable.DragAndOvershootBounds
-
             //ROW MODEL IS BASKETS (how many baskets!!!
 
             Row{
@@ -316,13 +354,10 @@ Page {
                         id: basketsrect
                         width: blindlabel.height+marginrect
                         height: blindlabel.height+marginrect
-
-
                         Rectangle {
                             anchors.fill: parent
                             opacity: settings.setting("transparency");
                             color: "#3a8499"
-
                         }
                         Label {
                             id: basketslabel

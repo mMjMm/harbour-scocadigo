@@ -34,6 +34,8 @@ Page {
     property int fontsizeHeader:screen.width/5
     property var transparency
     property var tabsound
+    property var scorecardname
+
 
     backNavigation: false
     FontLoader {
@@ -63,12 +65,23 @@ Page {
         }
 
 
+        scorecardname=settings.setting("scorecardname");
+
+        if(typeof scorecardname=="undefined")
+        {
+            settings.setSetting("scorecardname", 0)
+            scorecardname=settings.setting("scorecardname");
+
+        }
+
+
         transparency=settings.setting("transparency");
         root.opacity=transparency
         scocadigorectangle.opacity=transparency
         toplabelrec.opacity=transparency
-       /* DB.initialize();
-        DB.getBaseResult();
+      DB.initialize();
+
+        /*DB.getBaseResult();
         DB.getDetailResult();
         console.log("spieler:");
         DB.showSpieler();

@@ -30,15 +30,11 @@
 <context>
     <name>CreatedScorecard</name>
     <message>
-        <source>scorecard </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>player </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>total </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>player</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -303,10 +299,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>scorecard </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>player </source>
         <translation type="unfinished"></translation>
     </message>
@@ -343,6 +335,18 @@
     </message>
     <message>
         <source>TRANSPARENCY</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>scorecards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NICK NAME IN SCORECARDS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FULL NAME IN SCORECARDS</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

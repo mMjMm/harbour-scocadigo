@@ -1136,7 +1136,8 @@ function parorboogey(nickname){
 ///////////////////////////////////////SCORECARDS
 function getGamesbyDate() {
     var res_id;
-    var date;
+    var date2;
+    var time;
     var course_id;
     var time_played;
     var coursename;
@@ -1152,9 +1153,14 @@ function getGamesbyDate() {
         for (var i = 0; i < rs.rows.length; i++) {
             //DEBUG
             res_id=rs.rows.item(i).RES_ID
-            date = rs.rows.item(i).DATE
+            date2 = rs.rows.item(i).DATE
             course_id = rs.rows.item(i).COURSE_ID
             time_played = rs.rows.item(i).TIME_PLAYED
+
+
+
+            var date=date2.substr(0, 10)
+            time=date2.substring(11,19)
 
             var elapsed = time_played;
             var minutes = parseInt((elapsed / (1000 * 60)) % 60)
@@ -1162,20 +1168,20 @@ function getGamesbyDate() {
             //var days = parseInt(elapsed / (1000*60*60*24));
             hours = (hours < 10) ? "0" + hours : hours;
             minutes = (minutes < 10) ? "0" + minutes : minutes;
-            time_played = hours.toString() + "h " + minutes.toString() + "min "
+            time_played = hours.toString() + "h " + minutes.toString() + "min"
 
             coursename=getCourseNamebyID(course_id);
             coursepar=getCourseParbyID(course_id);
             bestscore=getBestScoreCourse(coursename);
             playerName=getPlayersbyRESID(res_id);
-            //            console.log(" DATE:" + date + " COURSENAME:" + coursename +" ("+coursepar+")" + " TIME_PLAYED:" + time_played +"best course: " + bestscore + " playername: " + playerName )
+
             playerName=playerName.toString();
-            //playerName = playerName.replace(/(\w+\W+\w+)\W+/ig,"$1\n");
 
             playerName = playerName.replace(/,/g," ");
 
             score.append({
                              "datum": date,
+                             "uhrzeit": time,
                              "coursename": coursename,
                              "coursepar": coursepar,
                              "timeplayed": time_played,
@@ -1231,15 +1237,30 @@ function getPlayersbyRESID(res_id){
     var db = getDatabase();
     var playerID = [];//create an empty array (don't know how many players played!!!
     var playerName = [];
-
+    var playersnames;
+    var result=[];
+    var scorecardname;
+    var playernamestext
     db.transaction(function(tx) {
         var rss = tx.executeSql("SELECT DISTINCT Id FROM resultDetail WHERE RES_ID = '" + res_id + "' ");
         for (var i = 0; i < rss.rows.length; i++) {
             playerID[i] = rss.rows.item(i).Id
             playerName[i]=getSpielerNamebyID(playerID[i]) + "("+getPlayersEndPar(res_id, playerID[i]) +") ";
 
+            playersnames=(getSpielerNamebyID(playerID[i]))
+            result[i]= playersnames.firstname +" "+ playersnames.lastname + "("+getPlayersEndPar(res_id, playerID[i]) +") ";
+
+
+
+
+
             players.append({
-                               players:getSpielerNamebyID(playerID[i])
+                              // players:(getSpielerNamebyID(playerID[i])).name
+
+                            nickname:playersnames.name, //nickname
+                            firstname:playersnames.firstname, //firstname
+                            lastname:playersnames.lastname + " "+ playersnames.firstname, //lastname
+                           // players:playersnames.firstname+" "+playersnames.lastname
                            })
 
             playerstotalpar.append({
@@ -1248,7 +1269,7 @@ function getPlayersbyRESID(res_id){
         }
     })
 
-    return playerName;
+    return result;
 
 }
 
@@ -1257,14 +1278,21 @@ function getSpielerNamebyID(playerID) {
     var db = getDatabase();
     var res = "";
     var name;
+    var firstname;
+    var lastname
+
     db.transaction(function(tx) {
-        var rss = tx.executeSql("SELECT NAME FROM spieler WHERE Id = '" + playerID + "' ");
+        var rss = tx.executeSql("SELECT NAME, FIRSTNAME, LASTNAME FROM spieler WHERE Id = '" + playerID + "' ");
         for (var i = 0; i < rss.rows.length; i++) {
             name = rss.rows.item(i).NAME
+            firstname = rss.rows.item(i).FIRSTNAME
+            lastname = rss.rows.item(i).LASTNAME
         }
-        res = name;
+        //res = name;
     })
-    return res;
+   // return res;
+    return{name:name, firstname:firstname, lastname:lastname}
+
 
 }
 
@@ -1362,7 +1390,6 @@ function getSpielerIDbyResId(res_id,coursename) {
 
 //////////////////////////DEBUGING show tables
 //spieler courses baskets resultBasic resultDetail endResult
-
 /*
 
 function showSpieler() {
@@ -1540,5 +1567,6 @@ function showEndResult() {
         }
     })
 }
+
 
 */

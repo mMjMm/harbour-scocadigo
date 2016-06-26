@@ -97,7 +97,12 @@ Page {
         today = yyyy + '-' + mm + '-' + dd;
 
         //insertBaseResult
-        DB.insertBaseResult(today, courseid, elapsed2)
+       // DB.insertBaseResult(today, courseid, elapsed2)
+
+        DB.insertBaseResult(date(), courseid, elapsed2)
+
+
+
         var resultid=DB.getRES_ID();
         for (n = 0; n < baskets; n++) {
 
@@ -225,7 +230,7 @@ Page {
                 anchors.verticalCenter:topnewgame.verticalCenter
                 width: pageheader.height-Theme.paddingSmall; height:pageheader.height-Theme.paddingSmall
                 fillMode: Image.PreserveAspectFit
-                source: "newgameIcon.png"
+                source: "statisticsicon.png"
             }
             Label {
                 id: pageheader
@@ -237,19 +242,10 @@ Page {
                 font.pixelSize:screen.width/9
                 opacity: 1
                 truncationMode: TruncationMode.Fade
-                text: qsTr("scorecard ") + coursename
+                text:coursename+" (" + totalpar + ")"
+            }
 
-            }
-            Label {
-                id: pageheaderpar
-                font.family: bebasNeue.name
-                anchors{baseline: pageheader.baseline;left: pageheader.right;leftMargin:Theme.paddingSmall}
-                color: "white"
-                font.pixelSize: Theme.fontSizeSmall
-                font.bold: true
-                opacity: 1
-                text: " (" + totalpar + ")"
-            }
+
 
             Label {
                 id: timelabel

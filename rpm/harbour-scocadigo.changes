@@ -12,14 +12,14 @@
 
 * Mon Jun 20 2016 Michael Johannes Muik <info@scocadigo.com> 0.0.2-1
 
-- added cover view! [start a new game; intermediate result while playing a game and endresult with time played]
-- settings page: added look&feel settings: Change transparency! And acoustic feedback!
+- Cover view! [start a new game; intermediate result while playing a game and endresult with time played]
+- settings page: added look&feel settings: Change transparency! And acoustic feedback! Show FULL or NICK name in scorecards
 - generate scorecard from played games
 - scorecard supports now max. 10 players (before 6)
 - possibility to delete a played game
 - better lenght handling of course and player names
 - bugfix on edit player page (plus minor design changes)
-- german translation
+
 
 * Mon Jun 06 2016 Michael Johannes Muik <info@scocadigo.com> 0.0.1-1
 

@@ -3,13 +3,11 @@ import Sailfish.Silica 1.0
 import "Database.js" as DB
 
 Page {
-
-    id: newgamePage
+    id: settingsPage
     property var transparency
     property bool tabsound
-
+    property var scorecardname
     property int paddinglarge12:Theme.paddingLarge*1.2
-
     FontLoader {
         id: bebasNeue
         source: "bebasNeue Regular.otf"
@@ -18,7 +16,6 @@ Page {
         id: fontawesome
         source: "fontawesome-webfont.ttf"
     }
-
     RemorsePopup {
         id: remorse
     }
@@ -29,27 +26,21 @@ Page {
         })
     }
     Component.onCompleted: {
-
-
         if(settings.setting("tabsound")==="1")
         {
             soundswitch.checked=true
         }
-
         if(settings.setting("tabsound")==="0")
         {
             soundswitch.checked=false
         }
-
+        scorecardname=settings.setting("scorecardname")
     }
-        SilicaFlickable {
-
+    SilicaFlickable {
         anchors.fill: parent
         VerticalScrollDecorator {
         }
         PullDownMenu {
-
-
             MenuItem {
                 text: qsTr("DELETE EVERYTHING")
                 onClicked: {
@@ -62,11 +53,8 @@ Page {
                     pageStack.push(Qt.resolvedUrl("About.qml"))
                 }
             }
-
         }
-
         Rectangle {
-
             id: root //it's a good idea to name it always root so I'm able to remember it everytime ;)
             width: parent.width
             height: parent.height
@@ -74,7 +62,6 @@ Page {
             opacity: settings.setting("transparency");
             radius: 3
         }
-
         Column {
             id: column
             width: root.width
@@ -84,14 +71,12 @@ Page {
                 id: topAbout
                 width: root.width
                 height: pageheader.height
-
                 Rectangle {
                     id:topAboutrect
                     anchors.fill: parent
                     color: "#50597b"
                     opacity:settings.setting("transparency");
                 }
-
                 Image {
                     id:newgameicon
                     x: Theme.paddingLarge*2
@@ -154,7 +139,42 @@ Page {
             description: qsTr("ENABLE/DISABLE ACOUSTIC FEEDBACK WHEN PRESSING [-][+] BUTTONS")
             onCheckedChanged: {
                 (checked ? settings.setSetting("tabsound", 1) : settings.setSetting("tabsound", 0))
+            }
+        }
+        Label {
+            id: labelscorecard
+            x: Theme.paddingLarge
+            font.family: bebasNeue.name
+            anchors.top: soundswitch.bottom
+            anchors.topMargin: Theme.paddingLarge
+            anchors.right:root.right
+            anchors.rightMargin: Theme.paddingLarge
+            opacity:1
+            color: "white"
+            font.pixelSize: Theme.fontSizeExtraLarge
+            text: qsTr("scorecards")
+        }
+        ComboBox {
+            id:scorecardnamecombo
+            width: settingsPage.width
+            anchors.top:labelscorecard.bottom
+            anchors.topMargin: Theme.paddingLarge
+            label: "SHOW"
+            currentIndex:settings.setting("scorecardname")
+            onCurrentIndexChanged:{
+                if(currentIndex===0)
+                {
+                    settings.setSetting("scorecardname", 0)
+                }
+                if(currentIndex===1)
+                {
+                    settings.setSetting("scorecardname", 1)
 
+                }
+            }
+            menu: ContextMenu {
+                MenuItem { text: qsTr("NICK NAME IN SCORECARDS") }
+                MenuItem { text: qsTr("FULL NAME IN SCORECARDS" )}
             }
         }
     }
