@@ -224,7 +224,7 @@ Page {
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeTiny-3
                         text: "| "+qsTr("Ace: %1").arg(aces) + " | " + qsTr("Eagle: %1").arg(eagle) + " | "+ qsTr("Birdie: %1").arg(birdies) + " | " + qsTr("Par: %1").arg(pars)
-                              +" | "+ qsTr("Bogey: %1").arg(bogeys) + " | " + qsTr("Rest : %1") + rest+ " | " + qsTr("Total : %1").arg(total) + " |"
+                              +" | "+ qsTr("Bogey: %1").arg(bogeys) + " | " + qsTr("Rest : %1").arg(rest) + " | " + qsTr("Total : %1").arg(total) + " |"
 
                     }
                 }
