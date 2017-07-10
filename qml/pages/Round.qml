@@ -223,7 +223,7 @@ Page {
                     font.pixelSize: Theme.fontSizeExtraLarge
                     font.bold: true
                     opacity: 1
-                    text: "Bakset " + basketnummer + "/" + baskets
+                    text: qsTr("Basket %1 / %2").arg(basketnummer).arg(baskets)
                 }
             }
             Item {

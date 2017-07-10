@@ -260,6 +260,10 @@
         <source>Worst: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Basket %1 / %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Round_Results</name>
