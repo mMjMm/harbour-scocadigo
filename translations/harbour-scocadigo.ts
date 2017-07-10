@@ -241,14 +241,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>|BASKET </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>|Av.: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Basket %1 / %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -266,6 +258,14 @@
     </message>
     <message>
         <source>Worst: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Basket &lt;b&gt;%1&lt;b&gt; / %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Av.: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
