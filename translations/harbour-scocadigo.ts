@@ -416,5 +416,25 @@
         <source>sorted by date</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Course record: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No games played</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play a round of disc golf and come back!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
