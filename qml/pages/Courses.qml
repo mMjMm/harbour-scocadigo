@@ -17,7 +17,7 @@ Page {
         source: "fontawesome-webfont.ttf"
     }
     function reset() {
-        remorse.execute("DELETE ALL COURSES", function () {
+        remorse.execute(qsTr("Delete all courses"), function () {
             DB.dropCourses()
             pageStack.replace(Qt.resolvedUrl("Courses.qml"))
         })
@@ -44,14 +44,14 @@ Page {
         anchors.fill: parent
         PullDownMenu {
             MenuItem {
-                text: "Delete all courses"
+                text: qsTr("Delete all courses")
                 onClicked: {
                     reset()
                     DB.initialize()
                 }
             }
             MenuItem {
-                text: "add courses"
+                text: qsTr("Add courses")
                 onClicked: {
                     pageStack.replace(Qt.resolvedUrl("NewCourses.qml"))
                     //pageStack.replaceAbove(null, "NewCourses.qml")
@@ -85,7 +85,7 @@ Page {
                     id: pageheader
                     font.family: bebasNeue.name
                     anchors{top:topcourses.top;topMargin:Theme.paddingMedium;left:newgameicon.right;leftMargin:Theme.paddingMedium}
-                    text: qsTr("courses")
+                    text: qsTr("Courses")
                     font.pixelSize: Theme.fontSizeExtraLarge+Theme.fontSizeMedium
                     color: "white"
                     opacity: 1
@@ -122,7 +122,7 @@ Page {
                 menu: contextMenuComponent
                 //DELETE FUNKTION (löscht gewählten namen aus der datenbank)
                 function remove() {
-                    delegate.remorseAction("Deleting", function () {
+                    delegate.remorseAction(qsTr("Deleting"), function () {
                         DB.deleteCourse(coursename)
                         courses.remove(index)
                     })
@@ -160,7 +160,7 @@ Page {
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeExtraSmall
                     opacity: 1
-                    text: "Baskets:" + baskets
+                    text: qsTr("Baskets: %1").arg(baskets)
                 }
                 Label {
                     id: info
@@ -170,7 +170,7 @@ Page {
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeExtraSmall
                     opacity: 1
-                    text: "Par: " + totalpar
+                    text: qsTr("Par: %1").arg(totalpar)
                 }
 
                 Label {
@@ -180,7 +180,7 @@ Page {
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeExtraSmall
                     opacity: 1
-                    text: "Course Record: " + DB.getBestScoreCourse(coursename)+ "\nAverage-score: "+ DB.getAverageCourse(coursename)
+                    text: qsTr("Course Record: %1").arg(DB.getBestScoreCourse(coursename)) + "\n"+ qsTr("Average-score: %1").arg(DB.getAverageCourse(coursename))
                 }
 
                 Label {
@@ -191,7 +191,7 @@ Page {
                     font.family: bebasNeue.name
                     font.pixelSize: Theme.fontSizeExtraSmall
                     opacity: 1
-                    text:"Played: " + played
+                    text: qsTr("Played: %1").arg(played)
                 }
 
 
