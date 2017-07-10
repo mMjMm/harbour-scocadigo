@@ -383,8 +383,8 @@ Page {
                     opacity: 1
 
                     font.pixelSize: Theme.fontSizeLarge
-                    text: qsTr("|BASKET ") + "<b>"+basketnummer+"</b>" + "/" + baskets
-                          + "|Par: " + basketpar + qsTr("|Av.: ") + DB.getAverageBasket(coursename,basketnummer)+"|"
+                    text: "|" + qsTr("Basket <b>%1<b> / %2").arg(basketnummer).arg(baskets)
+                          + "|" + qsTr("Par: %1").arg(basketpar) + "|" + qsTr("Av.: %1").arg(DB.getAverageBasket(coursename,basketnummer))+"|"
                 }
             }
         }
@@ -534,7 +534,7 @@ Page {
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeSmall
                         opacity: 1
-                        text: qsTr("Best: ") + DB.getBestScoreBasket(index,coursename, basketnummer)
+                        text: qsTr("Best: %1").arg(DB.getBestScoreBasket(index,coursename, basketnummer))
                     }
                     //Avaerage of whole of player
                     Label {
@@ -543,7 +543,7 @@ Page {
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeSmall
                         opacity: 1
-                        text: qsTr("Average: ") + DB.getAverageBasketPlayer(nickname,coursename, basketnummer)
+                        text: qsTr("Average: %1").arg(DB.getAverageBasketPlayer(nickname,coursename, basketnummer))
                     }
                     //Players worst on hole
                     Label {
@@ -552,7 +552,7 @@ Page {
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeSmall
                         opacity: 1
-                        text: qsTr("Worst: ") + DB.getWorstScoreBasket(index,coursename, basketnummer)
+                        text: qsTr("Worst: %1").arg(DB.getWorstScoreBasket(index,coursename, basketnummer))
                     }
                 }
             }

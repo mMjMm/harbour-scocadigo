@@ -249,23 +249,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Best: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Average: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Worst: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Basket %1 / %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Par: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Best: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Worst: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
