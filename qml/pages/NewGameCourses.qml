@@ -149,7 +149,7 @@ Page {
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeExtraSmall
                         opacity: 1
-                        text: qsTr("Baskets:") + baskets
+                        text: qsTr("Baskets: %1").arg(baskets)
                     }
                     Label {
                         id: info
@@ -157,7 +157,7 @@ Page {
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeExtraSmall
                         opacity: 1
-                        text: "PAR: " + totalpar
+                        text: qsTr("Par: %1").arg(totalpar)
                     }
                     Label {
                         id: infoLabel
@@ -166,7 +166,7 @@ Page {
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeExtraSmall
                         opacity: 1
-                        text: qsTr("Top-score: ") + DB.getBestScoreCourse(coursename)+ "\n"+qsTr("Average-score: ")+ DB.getAverageCourse(coursename)
+                        text: qsTr("Top score: %1").arg(DB.getBestScoreCourse(coursename))+ "\n" + qsTr("Average score: %L1").arg(DB.getAverageCourse(coursename))
                     }
 
                     Label {
@@ -177,7 +177,7 @@ Page {
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeExtraSmall
                         opacity: 1
-                        text: qsTr("played: ") +played
+                        text: qsTr("Played: %1").arg(played)
                     }
 
 

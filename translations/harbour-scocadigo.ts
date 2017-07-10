@@ -105,6 +105,10 @@
         <source>Baskets</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Course name</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewGame</name>
@@ -144,27 +148,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Baskets:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top-score: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Average-score: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>played: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No courses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pull down to add a new course</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baskets: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top score: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average score: %L1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Played: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -214,23 +222,63 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Played rounds: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time played: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Average par: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No players</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pull down to add a new player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Played rounds: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time played: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average par: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ace: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eagle: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birdie: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bogey: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rest : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total : %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
