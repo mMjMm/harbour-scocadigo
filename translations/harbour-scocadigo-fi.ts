@@ -23,8 +23,40 @@
 <context>
     <name>Courses</name>
     <message>
-        <source>courses</source>
+        <source>Delete all courses</source>
+        <translation>Poista kaikki radat</translation>
+    </message>
+    <message>
+        <source>Add courses</source>
+        <translation>Lisää ratoja</translation>
+    </message>
+    <message>
+        <source>Courses</source>
         <translation>Radat</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation>Poistetaan</translation>
+    </message>
+    <message>
+        <source>Baskets: %1</source>
+        <translation>Väyliä: %1</translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation>Par: %1</translation>
+    </message>
+    <message>
+        <source>Course Record: %1</source>
+        <translation>Rataennätys: %1</translation>
+    </message>
+    <message>
+        <source>Average-score: %1</source>
+        <translation>Keskiarvo: %1</translation>
+    </message>
+    <message>
+        <source>Played: %1</source>
+        <translation>Kierroksia: %1</translation>
     </message>
 </context>
 <context>
@@ -314,7 +346,7 @@
     </message>
     <message>
         <source>Basket &lt;b&gt;%1&lt;/b&gt; / %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Väylä &lt;b&gt;%1&lt;/b&gt; / %2</translation>
     </message>
 </context>
 <context>
