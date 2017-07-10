@@ -245,7 +245,7 @@ Page {
                     font.pixelSize: Theme.fontSizeMedium
                     font.bold: true
                     opacity: 1
-                    text: "Par: " + basketpar
+                    text: qsTr("Par: %1").arg(basketpar)
                 }
             }
 
