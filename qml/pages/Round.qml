@@ -383,7 +383,7 @@ Page {
                     opacity: 1
 
                     font.pixelSize: Theme.fontSizeLarge
-                    text: "|" + qsTr("Basket <b>%1<b> / %2").arg(basketnummer).arg(baskets)
+                    text: "|" + qsTr("Basket <b>%1</b> / %2").arg(basketnummer).arg(baskets)
                           + "|" + qsTr("Par: %1").arg(basketpar) + "|" + qsTr("Av.: %1").arg(DB.getAverageBasket(coursename,basketnummer))+"|"
                 }
             }

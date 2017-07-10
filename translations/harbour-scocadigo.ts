@@ -309,11 +309,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Basket &lt;b&gt;%1&lt;b&gt; / %2</source>
+        <source>Av.: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Av.: %1</source>
+        <source>Basket &lt;b&gt;%1&lt;/b&gt; / %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
