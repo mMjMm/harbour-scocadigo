@@ -40,13 +40,7 @@ Page {
 
     Component.onCompleted: {
         nickname = DB.getNickNameAddedSelected()
-        // append player model (nickname and playerstotalpar)
-        for (q = 0; q < howmanyplayers; q++) {
-            player.append({
-                              nickname: nickname[q],
-                              playerstotalpar: mainPage.totalplayerpar[q]
-                          })
-        }
+
         //calculate elapsed time and convert to sce,min
         var elapsed = new Date().getTime() - mainPage.start
         var minutes = parseInt((elapsed / (1000 * 60)) % 60)
@@ -101,9 +95,10 @@ Page {
         mainWindow.cover = roundCover
         if (status === PageStatus.Activating) {
             for (var q = 0; q < howmanyplayers; q++) {
-                totalparplayerend[q] = totalparplayer[q] - totalparr
-                player.setProperty(q, "playerstotalpar",
-                                   mainPage.totalplayerpar[q])
+                player.set(q, {
+                                  nickname: nickname[q],
+                                  playerstotalpar: mainPage.totalplayerpar[q]
+                              })
             }
         }
 

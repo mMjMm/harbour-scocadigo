@@ -83,11 +83,6 @@ Page {
                 //console.log("basket one!!!)")
                 mainPage.totalplayerpar[q] = 0
             }
-            player.append({
-                              nickname: nickname[q],
-                              playersbasketpar: playersbasketpar[q],
-                              playerstotalpar: mainPage.totalplayerpar[q]
-                          })
         }
 
     }
@@ -133,8 +128,11 @@ Page {
         }
         if (status === PageStatus.Activating) {
             for (var q = 0; q < howmanyplayers; q++) {
-                player.setProperty(q, "playerstotalpar",
-                                   mainPage.totalplayerpar[q])
+                player.set(q, {
+                                  nickname: nickname[q],
+                                  playersbasketpar: playersbasketpar[q],
+                                  playerstotalpar: mainPage.totalplayerpar[q]
+                              })
             }
         }
         if (status === PageStatus.Deactivating) {
