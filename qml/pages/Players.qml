@@ -130,17 +130,17 @@ Page {
                     width: delegate.width+Theme.paddingMedium
 
                     MenuItem {
-                        text: "Delete"
+                        text: qsTr("Delete")
                         onClicked: remove()
                     }
                     MenuItem {
-                        text: "Edit"
+                        text: qsTr("Edit")
                         onClicked: editplayer()
                     }
                 }
                 //DELETE FUNKTION (löscht gewählten namen aus der datenbank)
                 function remove() {
-                    delegate.remorseAction("Deleting", function () {
+                    delegate.remorseAction(qsTr("Deleting"), function () {
                         DB.deletePlayer(nickname)
                         player.remove(index)
                     })
@@ -212,8 +212,8 @@ Page {
                         //anchors.topMargin: Theme.paddingLarge
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeTiny
-                        text: qsTr("Played rounds: ") + roundplayed + "\n"+qsTr("Time played: ")
-                              + timeplayed + "\n" + qsTr("Average par: ") + DB.getAveragePlayer(nickname)
+                        text: qsTr("Played rounds: %1").arg(roundplayed) + "\n" + qsTr("Time played: %1").arg(timeplayed)
+                               + "\n" + qsTr("Average par: %1").arg(DB.getAveragePlayer(nickname))
                     }
 
                     Label {
@@ -223,8 +223,8 @@ Page {
                         anchors.bottomMargin:  Theme.paddingMedium
                         font.family: bebasNeue.name
                         font.pixelSize: Theme.fontSizeTiny-3
-                        text: "| ace: " + aces + " | eagle: " +eagle+ " | birdie: " + birdies+" | par: "
-                              + pars+" | Bogey: " +bogeys+" | rest : " + rest+ " | total : " + total+" |"
+                        text: "| "+qsTr("Ace: %1").arg(aces) + " | " + qsTr("Eagle: %1").arg(eagle) + " | "+ qsTr("Birdie: %1").arg(birdies) + " | " + qsTr("Par: %1").arg(pars)
+                              +" | "+ qsTr("Bogey: %1").arg(bogeys) + " | " + qsTr("Rest : %1").arg(rest) + " | " + qsTr("Total : %1").arg(total) + " |"
 
                     }
                 }

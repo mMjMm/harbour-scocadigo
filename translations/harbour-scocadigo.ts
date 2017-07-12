@@ -23,7 +23,39 @@
 <context>
     <name>Courses</name>
     <message>
-        <source>courses</source>
+        <source>Delete all courses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add courses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Courses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baskets: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Course Record: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average-score: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Played: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -105,6 +137,10 @@
         <source>Baskets</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Course name</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewGame</name>
@@ -144,27 +180,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Baskets:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top-score: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Average-score: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>played: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No courses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pull down to add a new course</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baskets: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top score: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average score: %L1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Played: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -214,23 +254,63 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Played rounds: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time played: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Average par: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No players</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pull down to add a new player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Played rounds: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time played: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Average par: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ace: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eagle: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birdie: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bogey: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rest : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total : %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -241,23 +321,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>|BASKET </source>
+        <source>Basket %1 / %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>|Av.: </source>
+        <source>Par: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Best: </source>
+        <source>Best: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Average: </source>
+        <source>Average: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Worst: </source>
+        <source>Worst: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Av.: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Basket &lt;b&gt;%1&lt;/b&gt; / %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -349,6 +437,10 @@
         <source>FULL NAME IN SCORECARDS</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>SHOW</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Statistics</name>
@@ -358,6 +450,26 @@
     </message>
     <message>
         <source>sorted by date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Course record: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No games played</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play a round of disc golf and come back!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

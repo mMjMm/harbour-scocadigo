@@ -140,14 +140,14 @@ Page {
                     width: delegate.width+Theme.paddingMedium
 
                     MenuItem {
-                        text: "Delete"
+                        text: qsTr("Delete")
                         onClicked: remove()
                     }
 
                 }
 
                 function remove() {
-                    delegate.remorseAction("Deleting", function () {
+                    delegate.remorseAction(qsTr("Deleting"), function () {
                         DB.deleteGame(res_id)
                         score.remove(index)
                     })
@@ -228,7 +228,7 @@ Page {
                     anchors.top: courseNameAndPar.bottom
                     font.pixelSize: Theme.fontSizeExtraSmall
                     opacity: 1
-                    text: "course record " + bestscore
+                    text: qsTr("Course record: %1").arg(bestscore)
                 }
 
                 Label {
@@ -268,7 +268,7 @@ Page {
         id: nogames
         visible: listView.count == 0
         font.family: bebasNeue.name
-        text: "No games played"
+        text: qsTr("No games played")
         color: "white"
         x: Theme.paddingLarge
         anchors.horizontalCenter: statisticsPage.horizontalCenter
@@ -278,7 +278,7 @@ Page {
         Label {
             visible: listView.count == 0
             font.family: bebasNeue.name
-            text: "play a round of disc golf! And come back!"
+            text: qsTr("Play a round of disc golf and come back!")
             color: "white"
             x: Theme.paddingLarge
             font.pixelSize: Theme.fontSizeMedium

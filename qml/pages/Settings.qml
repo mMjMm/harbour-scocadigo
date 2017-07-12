@@ -20,7 +20,7 @@ Page {
         id: remorse
     }
     function reset() {
-        remorse.execute("DELETE EVERYTHING", function () {
+        remorse.execute(qsTr("DELETE EVERYTHING"), function () {
             DB.dropAll()
             pageStack.replace(Qt.resolvedUrl("FirstPage.qml"))
         })
@@ -159,7 +159,7 @@ Page {
             width: settingsPage.width
             anchors.top:labelscorecard.bottom
             anchors.topMargin: Theme.paddingLarge
-            label: "SHOW"
+            label: qsTr("SHOW")
             currentIndex:settings.setting("scorecardname")
             onCurrentIndexChanged:{
                 if(currentIndex===0)

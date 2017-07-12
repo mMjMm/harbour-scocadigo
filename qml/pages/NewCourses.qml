@@ -67,7 +67,7 @@ Dialog {
                         width: parent.width
                         color: "white"
                         maximumLength: 20// 12
-                        placeholderText: "Course name"
+                        placeholderText: qsTr("Course name")
                         inputMethodHints: Qt.ImhNoPredictiveText
 
                         onTextChanged: {
