@@ -23,8 +23,40 @@
 <context>
     <name>Courses</name>
     <message>
-        <source>courses</source>
-        <translation>banor</translation>
+        <source>Delete all courses</source>
+        <translation>Ta bort alla banor</translation>
+    </message>
+    <message>
+        <source>Add courses</source>
+        <translation>Lägg till banor</translation>
+    </message>
+    <message>
+        <source>Courses</source>
+        <translation>Banor</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation>Tar bort</translation>
+    </message>
+    <message>
+        <source>Baskets: %1</source>
+        <translation>Korgar: %1</translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation>Par: %1</translation>
+    </message>
+    <message>
+        <source>Course Record: %1</source>
+        <translation>Banrekord: %1</translation>
+    </message>
+    <message>
+        <source>Average-score: %1</source>
+        <translation>Genomsnittsresultat: %1</translation>
+    </message>
+    <message>
+        <source>Played: %1</source>
+        <translation>Spelad: %1</translation>
     </message>
 </context>
 <context>
@@ -105,6 +137,10 @@
         <source>Baskets</source>
         <translation>Korgar</translation>
     </message>
+    <message>
+        <source>Course name</source>
+        <translation>Bannamn</translation>
+    </message>
 </context>
 <context>
     <name>NewGame</name>
@@ -144,28 +180,32 @@
         <translation>LÄGG TILL BANOR</translation>
     </message>
     <message>
-        <source>Baskets:</source>
-        <translation>Korgar:</translation>
-    </message>
-    <message>
-        <source>Top-score: </source>
-        <translation>Toppresultat: </translation>
-    </message>
-    <message>
-        <source>Average-score: </source>
-        <translation>Medelresultat: </translation>
-    </message>
-    <message>
-        <source>played: </source>
-        <translation>spelat: </translation>
-    </message>
-    <message>
         <source>No courses</source>
         <translation>Inga banor</translation>
     </message>
     <message>
         <source>pull down to add a new course</source>
-        <translation>dra neråt för att lägga till ny bana</translation>
+        <translation>Dra neråt för att lägga till en ny bana</translation>
+    </message>
+    <message>
+        <source>Baskets: %1</source>
+        <translation>Korgar: %1</translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation>Par: %1</translation>
+    </message>
+    <message>
+        <source>Top score: %1</source>
+        <translation>Toppresultat: %1</translation>
+    </message>
+    <message>
+        <source>Average score: %L1</source>
+        <translation>Genomsnittsresultat: %L1</translation>
+    </message>
+    <message>
+        <source>Played: %1</source>
+        <translation>Spelad: %1</translation>
     </message>
 </context>
 <context>
@@ -214,24 +254,64 @@
         <translation>LÄGG TILL SPELARE</translation>
     </message>
     <message>
-        <source>Played rounds: </source>
-        <translation>Spelade rundor: </translation>
-    </message>
-    <message>
-        <source>Time played: </source>
-        <translation>Spelad tid: </translation>
-    </message>
-    <message>
-        <source>Average par: </source>
-        <translation>Medelpar: </translation>
-    </message>
-    <message>
         <source>No players</source>
         <translation>Inga spelare</translation>
     </message>
     <message>
         <source>pull down to add a new player</source>
-        <translation>dra neråt för att lägga till ny spelare</translation>
+        <translation>Dra neråt för att lägga till en ny spelare</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Ta bort</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Redigera</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation>Tar bort</translation>
+    </message>
+    <message>
+        <source>Played rounds: %1</source>
+        <translation>Spelade rundor: %1</translation>
+    </message>
+    <message>
+        <source>Time played: %1</source>
+        <translation>Spelad tid: %1</translation>
+    </message>
+    <message>
+        <source>Average par: %1</source>
+        <translation>Genomsnittligt par: %1</translation>
+    </message>
+    <message>
+        <source>Ace: %1</source>
+        <translation>Ace: %1</translation>
+    </message>
+    <message>
+        <source>Eagle: %1</source>
+        <translation>Eagle: %1</translation>
+    </message>
+    <message>
+        <source>Birdie: %1</source>
+        <translation>Birdie: %1</translation>
+    </message>
+    <message>
+        <source>Par: %1</source>
+        <translation>Par: %1</translation>
+    </message>
+    <message>
+        <source>Bogey: %1</source>
+        <translation>Bogey: %1</translation>
+    </message>
+    <message>
+        <source>Rest : %1</source>
+        <translation>Rest : %1</translation>
+    </message>
+    <message>
+        <source>Total : %1</source>
+        <translation>Totalt: %1</translation>
     </message>
 </context>
 <context>
@@ -241,24 +321,32 @@
         <translation>AVBRYT RUNDAN</translation>
     </message>
     <message>
-        <source>|BASKET </source>
-        <translation>|KORG </translation>
+        <source>Basket %1 / %2</source>
+        <translation>Korg %1 / %2</translation>
     </message>
     <message>
-        <source>|Av.: </source>
-        <translation>|Medel: </translation>
+        <source>Par: %1</source>
+        <translation>Par: %1</translation>
     </message>
     <message>
-        <source>Best: </source>
-        <translation>Bäst: </translation>
+        <source>Best: %1</source>
+        <translation>Bäst: %1</translation>
     </message>
     <message>
-        <source>Average: </source>
-        <translation>Medel: </translation>
+        <source>Average: %1</source>
+        <translation>Medel: %1</translation>
     </message>
     <message>
-        <source>Worst: </source>
-        <translation>Sämst: </translation>
+        <source>Worst: %1</source>
+        <translation>Sämst: %1</translation>
+    </message>
+    <message>
+        <source>Av.: %1</source>
+        <translation>Medel: %1</translation>
+    </message>
+    <message>
+        <source>Basket &lt;b&gt;%1&lt;/b&gt; / %2</source>
+        <translation>Korg &lt;b&gt;%1&lt;/b&gt; / %2</translation>
     </message>
 </context>
 <context>
@@ -349,6 +437,10 @@
         <source>FULL NAME IN SCORECARDS</source>
         <translation>FULLSTÄNDIGT NAMN PÅ POÄNGKORT</translation>
     </message>
+    <message>
+        <source>SHOW</source>
+        <translation>VISA</translation>
+    </message>
 </context>
 <context>
     <name>Statistics</name>
@@ -358,7 +450,27 @@
     </message>
     <message>
         <source>sorted by date</source>
-        <translation>sorterat efter datum</translation>
+        <translation>sorterad efter datum</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Ta bort</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation>Tar bort</translation>
+    </message>
+    <message>
+        <source>Course record: %1</source>
+        <translation>Banrekord: %1</translation>
+    </message>
+    <message>
+        <source>No games played</source>
+        <translation>Inga spel spelade</translation>
+    </message>
+    <message>
+        <source>Play a round of disc golf and come back!</source>
+        <translation>Spela en runda frisbee-golf och återkom!</translation>
     </message>
 </context>
 </TS>
