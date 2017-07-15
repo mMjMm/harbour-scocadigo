@@ -26,19 +26,29 @@ OTHER_FILES += qml/harbour-scocadigo.qml \
     translations/*.ts \
     harbour-scocadigo.desktop
 
+
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
+
+
+
 
 # to disable building translations every time, comment out the
 # following CONFIG line
+
+
+
+# Translations
 CONFIG += sailfishapp_i18n
 
-# German translation is enabled as an example. If you aren't
-# planning to localize your app, remember to comment out the
-# following TRANSLATIONS line. And also do not forget to
-# modify the localized app name in the the .desktop file.
-TRANSLATIONS += \
-    translations/harbour-scocadigo-de.ts \
-    translations/harbour-scocadigo-fi.ts
+
+
+
+TRANSLATIONS += translations/harbour-scocadigo-sv.ts
+
+TRANSLATIONS +=  translations/harbour-scocadigo-fi.ts
+
+TRANSLATIONS +=  translations/harbour-scocadigo.ts
+
 DISTFILES += \
     qml/pages/Buttons.qml \
     qml/pages/Database.js \
@@ -73,7 +83,8 @@ DISTFILES += \
     qml/pages/Statistics.qml \
     rpm/harbour-scocadigo.changes \
     qml/pages/CreatedScorecard.qml \
-    translations/harbour-scocadigo-de.ts
+    translations/harbour-scocadigo-sv.ts
+    #translations/harbour-scocadigo-de.ts
 
 HEADERS += \
     src/settings.h

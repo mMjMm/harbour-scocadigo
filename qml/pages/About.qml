@@ -97,6 +97,7 @@ Page {
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignJustify
 
+
             anchors {
                 left: parent.left
                 right: parent.right
